@@ -1,0 +1,51 @@
+{
+  "model_name": "AFib-ResLSTM",
+  "version": "1.0",
+  "training_date": "2025-10-14 09:43:04",
+  "dataset": {
+    "total_samples": 102609,
+    "train_samples": 71826,
+    "val_samples": 15391,
+    "test_samples": 15392,
+    "input_shape": [
+      1,
+      2500
+    ],
+    "sampling_rate": "250 Hz",
+    "window_duration": "10 seconds"
+  },
+  "model_architecture": {
+    "total_parameters": 8310658,
+    "trainable_parameters": 8310658,
+    "novel_contributions": [
+      "Multi-scale parallel convolutions",
+      "Self-attention on Bi-LSTM output",
+      "Hybrid feature fusion"
+    ]
+  },
+  "training_config": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "epochs_trained": 42,
+    "best_epoch": 27,
+    "optimizer": "Adam",
+    "loss_function": "Focal Loss (alpha=0.65, gamma=2.0)"
+  },
+  "test_performance": {
+    "accuracy": 0.9775857588357588,
+    "precision": 0.951558921965827,
+    "recall": 0.9872076023391813,
+    "sensitivity": 0.9872076023391813,
+    "specificity": 0.9722782258064516,
+    "f1_score": 0.9690555206745,
+    "auroc": 0.9981972925214584,
+    "confusion_matrix": {
+      "TP": 5402,
+      "TN": 9645,
+      "FP": 275,
+      "FN": 70
+    },
+    "test_samples": 15392
+  },
+  "optimal_threshold": 0.6090493202209473
+}

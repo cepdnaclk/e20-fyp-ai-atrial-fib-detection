@@ -1,0 +1,12 @@
+{
+  "false_positives": {
+    "count": 275,
+    "rate": 2.7721774193548385,
+    "mean_confidence": 0.6557523012161255
+  },
+  "false_negatives": {
+    "count": 70,
+    "rate": 1.2792397660818713,
+    "mean_confidence": 0.6827141046524048
+  }
+}

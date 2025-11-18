@@ -1,0 +1,11 @@
+Pair_ID,Original_Class,Original_Label,Original_Confidence,CF_Class,CF_Label,CF_Confidence,Distance,Success
+1,1,AFib,0.8822,0,Normal,0.8271,0.112015,True
+2,1,AFib,0.8655,0,Normal,0.7953,0.082759,True
+3,1,AFib,0.9987,0,Normal,0.6771,0.126424,True
+4,1,AFib,0.9416,0,Normal,0.7761,0.092377,True
+5,1,AFib,0.9494,0,Normal,0.8465,0.129331,True
+6,0,Normal,0.4822,1,AFib,0.9348,0.271924,True
+7,0,Normal,0.6774,1,AFib,0.9177,0.151691,True
+8,0,Normal,0.9058,1,AFib,0.9042,0.155051,True
+9,0,Normal,0.9899,1,AFib,0.8539,0.178235,True
+10,0,Normal,0.6724,1,AFib,0.8697,0.147270,True
