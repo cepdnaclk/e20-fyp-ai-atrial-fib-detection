@@ -47,6 +47,32 @@ This approach moves beyond traditional XAI methods like Grad-CAM heatmaps, which
 
 ---
 
+## Research Documentation
+
+This section provides access to key project documentation, presentations, and comprehensive reviews developed throughout the research process.
+
+### Project Presentations
+
+**Research Proposal Presentation** (December 2024)  
+Comprehensive presentation outlining the research objectives, methodology, and expected contributions.  
+[View Presentation](https://www.canva.com/design/DAG4qXiPg9M/5yH3pT2uZwcUHr7vq-2UZA/edit)
+
+**Project Workflow Documentation**  
+Detailed visualization of Phase 1 and Phase 2 implementation pipeline, including data flow, model architecture, and evaluation metrics.  
+[View Workflow](https://www.canva.com/design/DAGxWNCz_50/m1i5Yjk3yRWb9SeOnVByYw/edit)
+
+### Literature Review
+
+**Comprehensive Literature Review** - Counterfactual Explanations in Medical AI and ECG Analysis  
+Systematic review covering foundational work in counterfactual generation, XAI for ECG, and AFib detection benchmarks. Includes critical evaluation of three counterfactual generation approaches (Heuristic/Prototype Methods, Latent Space Methods, and Diffusion/Style Transfer).  
+[Download Literature Review (PDF)](https://drive.google.com/file/d/1XpHOSr7Cyw3i7yFoR6qp6hdMFHNk54KU/view?usp=sharing)
+
+### Additional Resources
+
+For access to additional technical documentation, dataset preparation notebooks, or research materials, please contact the research team directly.
+
+---
+
 ## Current Progress and Achievements
 
 ### Phase 1: High-Accuracy AFib Classifier (Completed)
