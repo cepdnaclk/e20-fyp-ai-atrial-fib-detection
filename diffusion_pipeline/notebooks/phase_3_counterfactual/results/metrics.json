@@ -1,0 +1,25 @@
+{
+  "normal_to_afib": {
+    "direction": "Normal \u2192 AFib",
+    "total_samples": 11239,
+    "flip_rate": 0.15001334684319806,
+    "mean_correlation": 0.19046509265899658,
+    "std_correlation": 0.13059763610363007,
+    "mean_mse": 0.0052706291899085045,
+    "mean_plausibility": 0.7557144763769017,
+    "mean_attempts": 1.0457336061927218
+  },
+  "afib_to_normal": {
+    "direction": "AFib \u2192 Normal",
+    "total_samples": 11230,
+    "flip_rate": 0.6641139762272075,
+    "mean_correlation": 0.17986945807933807,
+    "std_correlation": 0.15392424166202545,
+    "mean_mse": 0.005265198182314634,
+    "mean_plausibility": 0.6079615612941526,
+    "mean_attempts": 2.6253784505788067
+  },
+  "overall_flip_rate": 0.4070636615352028,
+  "overall_correlation": 0.18516727536916733,
+  "overall_plausibility": 0.6818380188355271
+}

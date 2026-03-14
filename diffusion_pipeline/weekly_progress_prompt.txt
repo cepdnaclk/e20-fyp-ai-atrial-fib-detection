@@ -1,0 +1,202 @@
+PROMPT FOR CLAUDE WEB - WEEKLY PROGRESS PRESENTATION
+
+I need help creating a presentation for my project meeting. Below is a summary of my weekly progress on my thesis project: "Explainable AI for ECG-based Atrial Fibrillation Detection using Counterfactual Explanations."
+
+Please help me structure this into a professional presentation with slides covering the work done this week.
+
+================================================================================
+PROJECT CONTEXT
+================================================================================
+
+THESIS TOPIC: Explainable AI for ECG-based Atrial Fibrillation Detection
+APPROACH: Using counterfactual explanations to show "what would need to change in an ECG for the classification to flip from AFib to Normal (or vice versa)"
+
+PROJECT PHASES:
+- Phase 1 (COMPLETED): Train AFib classifier (AFibResLSTM) - 94%+ accuracy achieved
+- Phase 2A (THIS WEEK): Train VAE for ECG reconstruction
+- Phase 2B (NEXT): Train diffusion model for counterfactual generation
+- Phase 3 (FUTURE): Generate and evaluate counterfactual explanations
+
+================================================================================
+THIS WEEK'S WORK - DETAILED PROGRESS
+================================================================================
+
+### PART 1: STANDARD VAE TRAINING (02_train_vae.ipynb)
+
+OBJECTIVE: Train a Variational Autoencoder to reconstruct ECG signals while preserving diagnostic features
+
+ARCHITECTURE:
+- Input: Single-lead ECG, 2500 samples (10 seconds at 250Hz)
+- Encoder: 3 conv layers [1→32→64→64 channels], stride 2, GroupNorm, SiLU activation
+- Latent Space: 64 channels × 312 length = 19,968 dimensions
+- Compression Factor: 8x (2500 → 312)
+- Decoder: 3 transposed conv layers, output range [-1.5, 1.5] mV (clinical range)
+- Output: Reconstructed ECG, 2500 samples
+
+TRAINING CONFIGURATION:
+- Batch size: 64
+- Epochs: 60 (extended training)
+- Learning rate: 5e-5
+- Loss: MSE + KL divergence + Perceptual loss (using Phase 1 classifier)
+- Loss weights: λ_KL = 0.0001, λ_perceptual = 0.8
+
+KEY INNOVATION - PERCEPTUAL LOSS:
+- Used the trained Phase 1 AFibResLSTM classifier
+- Perceptual loss ensures VAE reconstructions preserve diagnostic features
+- Classifier is frozen during VAE training (no gradient updates to classifier)
+- Cross-entropy loss between classifier predictions on original vs reconstructed ECGs
+
+RESULTS ACHIEVED:
+- Reconstruction MSE: ~0.01-0.02 (very good)
+- Latent space is well-organized (no posterior collapse)
+- VAE successfully reconstructs ECG waveforms
+
+CLINICAL VALIDATION TEST:
+- Ran Phase 1 classifier on both original and VAE-reconstructed ECGs
+- Measured "Prediction Agreement" - how often classifier gives same prediction on original vs reconstructed
+- Results:
+  * Overall Agreement: ~90%+
+  * AFib Agreement: High (classifier still detects AFib after reconstruction)
+  * Normal Agreement: Slightly lower (room for improvement)
+  * Confidence preserved: ~95%+
+
+LATENT SPACE INTERPOLATION TEST:
+- Encoded AFib sample → latent space
+- Encoded Normal sample → latent space
+- Interpolated between them
+- Decoded each interpolation step
+- Classifier shows smooth transition from AFib→Normal prediction
+- This proves latent space captures diagnostic features!
+
+VERDICT: VAE is ready for counterfactual generation
+
+--------------------------------------------------------------------------------
+
+### PART 2: CLASS-CONDITIONAL VAE (02_train_vae_class_conditional.ipynb)
+
+OBJECTIVE: Improve VAE by adding class conditioning to better separate AFib and Normal patterns
+
+MOTIVATION:
+- Standard VAE doesn't explicitly know the class label
+- Class-conditional VAE can learn class-specific reconstructions
+- Better for counterfactual generation: we can explicitly condition on target class
+
+ARCHITECTURE CHANGES:
+- Added class embedding layer: nn.Embedding(num_classes=2, embedding_dim=64)
+- Encoder: Adds class embedding to latent mu and logvar
+- Decoder: Adds class embedding to latent z before decoding
+- Conditioning type: "add" (class embedding added to latent)
+
+TRANSFER LEARNING APPROACH:
+- Started from pretrained standard VAE weights (60 epochs)
+- Only trained new class embedding layers from scratch
+- Fine-tuned entire model for 30 additional epochs
+- Lower learning rate: 2e-5 (vs 5e-5 for training from scratch)
+
+TRAINING RESULTS:
+- Successfully trained class-conditional VAE
+- Model learns to condition reconstruction on class label
+- Perceptual loss still used to preserve diagnostic features
+
+VALIDATION:
+- Classifier agreement test on class-conditional VAE
+- Compared original vs reconstructed ECG predictions
+- Results show class conditioning helps maintain diagnostic features
+
+NEXT STEPS:
+- Use class-conditional VAE for counterfactual generation
+- Input AFib ECG, condition on Normal class → get counterfactual Normal ECG
+- Input Normal ECG, condition on AFib class → get counterfactual AFib ECG
+
+================================================================================
+KEY TECHNICAL CHALLENGES SOLVED
+================================================================================
+
+1. PERCEPTUAL LOSS IMPLEMENTATION:
+   - Correctly imported Phase 1 classifier (AFibResLSTM, ModelConfig)
+   - Z-score normalization for classifier input (per-sample)
+   - Gradient flow: backprop through VAE, but not through frozen classifier
+
+2. CLASS EMBEDDING FOR CONDITIONING:
+   - Labels must be LongTensor for nn.Embedding
+   - Embedding dimension matches latent channels (64)
+   - Embedding added to both encoder output and decoder input
+
+3. TRANSFER LEARNING:
+   - Loaded pretrained VAE weights
+   - Initialized new embedding layers randomly
+   - Used strict=False for load_state_dict to handle new layers
+
+4. EVALUATION METRICS:
+   - Prediction Agreement: Same prediction on original vs reconstructed
+   - Classifier Accuracy: Ground truth accuracy on reconstructed ECGs
+   - Confidence Preservation: Classifier confidence comparison
+   - Per-class analysis: AFib vs Normal agreement rates
+
+================================================================================
+VISUALIZATIONS CREATED
+================================================================================
+
+1. Training curves (loss over epochs)
+2. Reconstruction examples (Original vs Reconstructed vs Overlay)
+3. Latent space interpolation (AFib → Normal transition)
+4. Classifier agreement examples (Both Correct, Both Wrong, Disagree)
+5. Confusion matrices (Original predictions vs Reconstructed predictions)
+
+================================================================================
+SUMMARY OF WEEK'S ACHIEVEMENTS
+================================================================================
+
+✅ Trained standard VAE to 60 epochs with perceptual loss
+✅ Achieved 90%+ classifier agreement on reconstructions
+✅ Validated latent space captures diagnostic features
+✅ Implemented class-conditional VAE with transfer learning
+✅ Trained class-conditional VAE for 30 epochs
+✅ Created comprehensive evaluation pipeline
+
+================================================================================
+NEXT WEEK'S PLAN
+================================================================================
+
+1. Generate actual counterfactual ECGs:
+   - Input AFib ECG, condition on Normal → Counterfactual Normal
+   - Input Normal ECG, condition on AFib → Counterfactual AFib
+
+2. Evaluate counterfactual quality:
+   - Do counterfactuals flip classifier prediction?
+   - Are counterfactuals clinically realistic?
+   - What changes between original and counterfactual?
+
+3. (If time permits) Start Phase 2B: Diffusion model training
+
+================================================================================
+PRESENTATION STRUCTURE REQUEST
+================================================================================
+
+Please create a presentation with the following slides:
+1. Title slide
+2. Project overview (thesis topic, phases)
+3. This week's objectives
+4. Standard VAE architecture (diagram description)
+5. Perceptual loss innovation
+6. Standard VAE results
+7. Clinical validation results
+8. Class-conditional VAE motivation
+9. Class-conditional VAE architecture changes
+10. Transfer learning approach
+11. Class-conditional VAE results
+12. Key visualizations (describe what each shows)
+13. Challenges solved
+14. Summary of achievements
+15. Next week's plan
+16. Questions slide
+
+For each slide, please provide:
+- Slide title
+- 4-6 bullet points
+- Key numbers/metrics where applicable
+- Speaker notes (what to say)
+
+================================================================================
+END OF PROMPT
+================================================================================

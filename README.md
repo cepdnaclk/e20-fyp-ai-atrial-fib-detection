@@ -1,458 +1,348 @@
-# Explainable AI for Counterfactual Simulation of Cardiac Arrhythmias
+# Diffusion-Based Counterfactual ECG Generation for Atrial Fibrillation Data Augmentation
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![HuggingFace Model](https://img.shields.io/badge/🤗_Model-Hub-yellow.svg)](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation)
+[![HuggingFace Demo](https://img.shields.io/badge/🤗_Demo-Space-orange.svg)](https://huggingface.co/spaces/TharakaDil2001/ecg-augmentation-demo)
 
-**An Interactive XAI Framework for "What-If" ECG Simulation**
-
-*Final Year Research Project - Group 29*  
+*Final Year Research Project — Group 29*  
 *Department of Computer Engineering, University of Peradeniya, Sri Lanka*  
-*2025-2026*
+*2024–2025*
+
+> **[Project Page](https://cepdnaclk.github.io/e20-fyp-ai-atrial-fib-detection/)** · **[Paper (IEEE)](diffusion_pipeline/paper/paper.pdf)** · **[Model Hub](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation)** · **[Live Demo](https://huggingface.co/spaces/TharakaDil2001/ecg-augmentation-demo)**
 
 ---
 
 ## Institutional Collaboration
 
-This research is conducted through an international collaboration between the Department of Computer Engineering at University of Peradeniya (Sri Lanka), SimulaMet (Simula Metropolitan Center for Digital Engineering) in Oslo, Norway, and is part of the EU-funded SEARCH Initiative for cardiovascular AI research.
+This research is conducted through an international collaboration as part of the EU-funded **[SEARCH Initiative](https://www.search-project.eu/)** for cardiovascular AI research:
 
-**Research Team:**
+| Institution | Role |
+|---|---|
+| University of Peradeniya, Sri Lanka | Lead research institution |
+| SimulaMet, Oslo, Norway | Co-supervision, research infrastructure |
+| University of Maryland, College Park, USA | Collaborator |
+| Tulane University School of Medicine, USA | Clinical advisory |
+| University of Copenhagen, Denmark | Clinical advisory |
 
-Students:
-- Dilshan D.M.T. (E/20/069)
-- Karunarathne K.N.P. (E/20/189)
+### Research Team
 
-Supervisors:
-- **Dr. Vajira Thambawita** - Senior Researcher, SimulaMet, Oslo, Norway ([https://vajira.info/](https://vajira.info/))
-- **Dr. Molly Maleckar** - Research Professor, SimulaMet, Oslo, Norway
-- Dr. Isuru Nawinne - Senior Lecturer, University of Peradeniya, Sri Lanka
-- Dr. Roshan Ragel - Professor, University of Peradeniya, Sri Lanka
+**Student Researchers:**
+
+| Name | Registration | Email | Links |
+|---|---|---|---|
+| Tharaka Dilshan | E/20/069 | [e20069@eng.pdn.ac.lk](mailto:e20069@eng.pdn.ac.lk) | [![ORCID](https://img.shields.io/badge/ORCID-0009--0006--1672--2317-green)](https://orcid.org/0009-0006-1672-2317) [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/tharaka-dilshan-237a8b345/) |
+| Nethmini Karunarathne | E/20/189 | [e20189@eng.pdn.ac.lk](mailto:e20189@eng.pdn.ac.lk) | [![ORCID](https://img.shields.io/badge/ORCID-0009--0009--5459--7846-green)](https://orcid.org/0009-0009-5459-7846) [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/nethmini-karunarathne-b20460206/) |
+
+**Supervisors:**
+
+| Name | Affiliation | ORCID |
+|---|---|---|
+| **Dr. Vajira Thambawita** | SimulaMet, Oslo, Norway | [![ORCID](https://img.shields.io/badge/ORCID-0000--0001--6026--0929-green)](https://orcid.org/0000-0001-6026-0929) |
+| **Prof. Mary M. Maleckar** | Tulane University / Simula Research Laboratory | [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--7012--3853-green)](https://orcid.org/0000-0002-7012-3853) |
+| Dr. Roshan Ragel | University of Peradeniya | [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--4511--2335-green)](https://orcid.org/0000-0002-4511-2335) |
+| Dr. Isuru Nawinne | University of Peradeniya | [![ORCID](https://img.shields.io/badge/ORCID-0009--0001--4760--3533-green)](https://orcid.org/0009-0001-4760-3533) |
+
+**Collaborators:**
+
+| Name | Affiliation | ORCID |
+|---|---|---|
+| Isuri Devindi | University of Maryland, College Park, USA | [![ORCID](https://img.shields.io/badge/ORCID-0009--0005--6615--7937-green)](https://orcid.org/0009-0005-6615-7937) |
+| Prof. Jørgen K. Kanters | University of Copenhagen, Denmark | [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--3267--4910-green)](https://orcid.org/0000-0002-3267-4910) |
 
 ---
 
 ## Overview
 
-Deep learning models have demonstrated remarkable performance in detecting Atrial Fibrillation (AFib) from ECG signals, achieving accuracies exceeding 97%. However, these models operate as "black boxes," limiting their adoption in clinical practice due to lack of interpretability. Physicians cannot verify the reasoning behind AI predictions, creating a fundamental trust gap between AI systems and clinical decision-making.
+Atrial fibrillation (AFib) is the most common sustained cardiac arrhythmia, affecting over 37 million individuals worldwide. Deep learning classifiers for AFib detection require large, balanced ECG datasets, yet clinical data remains scarce, imbalanced, and constrained by privacy regulations.
 
-This research addresses this critical limitation by developing an interactive Explainable AI (XAI) system that generates realistic counterfactual ECG signals. Our approach enables clinicians to explore "what-if" scenarios through an adjustable "Counterfactual Effort Score" parameter, providing transparent insights into AI decision-making processes.
+This research presents a **diffusion-based data augmentation pipeline** that generates synthetic ECG segments by transforming existing recordings into **counterfactual waveforms of the opposing class**. The pipeline uses:
 
-### Core Functionality
+- **Partial-noise conditional denoising** with classifier-free guidance
+- A **content-style disentangled UNet** that separates class-invariant morphology from class-discriminative rhythm features
+- A **multi-stage plausibility validator** enforcing morphological, physiological, and clinical directionality constraints
 
-The system operates in two modes:
+### Key Result
 
-- **Explanation Mode**: Given an AFib-classified ECG, generate a counterfactual showing what the patient's ECG would look like if classified as Normal
-- **Prognosis Mode**: Given a Normal ECG, generate a counterfactual showing what changes would lead to an AFib classification
+We demonstrate that **replacing 33% of real training data with diffusion-generated synthetic ECGs does not degrade classifier performance** — validated through 5-fold cross-validation and formal statistical equivalence testing (TOST, p = 0.007).
 
-This approach moves beyond traditional XAI methods like Grad-CAM heatmaps, which only indicate where the model focused attention. Our system reveals what specific changes would be required to alter the diagnostic outcome, providing actionable clinical insights.
+| Training Regime | Composition | Accuracy | F1 Score | AUROC |
+|---|---|---|---|---|
+| **A** — Original only | 18,681 real ECGs | 95.63 ± 0.33% | 95.65 ± 0.35% | 98.90 ± 0.16% |
+| **B** — Counterfactual only | 7,784 CFs (×3) | 85.94 ± 1.32% | 86.70 ± 1.24% | 93.24 ± 1.47% |
+| **C** — Augmented mixture | 67% real + 33% synthetic | 95.05 ± 0.50% | 95.09 ± 0.46% | 98.60 ± 0.17% |
 
----
+> **Regime C is statistically equivalent to Regime A** (accuracy gap: 0.58%, TOST p = 0.007, Δ = ±2%), and **zero near-copies** of training data were found among the accepted counterfactuals (max correlation: 0.30), confirming the generated signals are novel and privacy-preserving.
 
-## Research Documentation
-
-This section provides access to key project documentation, presentations, and comprehensive reviews developed throughout the research process.
-
-### Project Presentations
-
-**Research Proposal Presentation** (December 2024)  
-Comprehensive presentation outlining the research objectives, methodology, and expected contributions.  
-[View Presentation](https://www.canva.com/design/DAG4qXiPg9M/5yH3pT2uZwcUHr7vq-2UZA/edit)
-
-**Project Workflow Documentation**  
-Detailed visualization of Phase 1 and Phase 2 implementation pipeline, including data flow, model architecture, and evaluation metrics.  
-[View Workflow](https://www.canva.com/design/DAGxWNCz_50/m1i5Yjk3yRWb9SeOnVByYw/edit)
-
-### Literature Review
-
-**Comprehensive Literature Review** - Counterfactual Explanations in Medical AI and ECG Analysis  
-Systematic review covering foundational work in counterfactual generation, XAI for ECG, and AFib detection benchmarks. Includes critical evaluation of three counterfactual generation approaches (Heuristic/Prototype Methods, Latent Space Methods, and Diffusion/Style Transfer).  
-[Download Literature Review (PDF)](https://drive.google.com/file/d/1XpHOSr7Cyw3i7yFoR6qp6hdMFHNk54KU/view?usp=sharing)
-
-### Additional Resources
-
-For access to additional technical documentation, dataset preparation notebooks, or research materials, please contact the research team directly.
+![Performance Comparison](diffusion_pipeline/final_pipeline/results/figures/evaluation/augmentation_viability_comparison.png)
 
 ---
 
-## Current Progress and Achievements
+## Pipeline Architecture
 
-### Phase 1: High-Accuracy AFib Classifier (Completed)
-
-We implemented and validated a ResNet-BiLSTM classifier with attention mechanism for AFib detection. The model was trained on a combined dataset from PhysioNet 2017 Challenge and MIT-BIH AFDB.
-
-**Performance Metrics:**
-- Accuracy: 98.11%
-- F1-Score: 0.9664
-- AUROC: 0.9972
-- Sensitivity: 96.34%
-- Specificity: 98.59%
-
-**Dataset Characteristics:**
-- Combined PhysioNet 2017 + MIT-BIH AFDB
-- Single-lead ECG recordings
-- Sampling rate: 300 Hz
-- Total recordings: 8,528 (PhysioNet) + 48 subjects (MIT-BIH)
-
-### Phase 2: CoFE/VAE Counterfactual Engine (Validated)
-
-We successfully implemented and validated a Conditional Variational Autoencoder (CoFE framework) for generating counterfactual ECG signals.
-
-**Validation Results:**
-- Classification flip success rate: 90% (Normal to AFib and vice versa)
-- Mean Squared Error: 0.145 ± 0.051
-- Signal distortion: <0.5% from original signal
-- Physiological plausibility: Maintained through gradient-based latent optimization
-
-The CoFE prototype demonstrates proof-of-concept for counterfactual ECG generation while maintaining temporal coherence and physiological realism.
-
-### Phase 3: DiffStyleTS Diffusion Model (In Progress)
-
-We are currently advancing the generative architecture to a state-of-the-art disentangled diffusion model to address limitations observed in the VAE approach. Traditional VAEs suffer from signal blurriness, posterior collapse, and entangled latent representations. The DiffStyleTS (Diffusion-based Style Transfer for Time Series) architecture addresses these issues through:
-
-- Explicit content-style disentanglement via separate encoders
-- Diffusion-based generation for high-fidelity signal quality
-- Conditional denoising process for controlled counterfactual generation
-- Provable interpretability through enforced architectural separation
-
-The target architecture introduces the "Counterfactual Effort Score" - a continuous, interpretable metric that allows clinicians to control the strength of counterfactual transformation by adjusting content-style weighting parameters (W1, W2).
-
----
-
-## Technical Architecture
+The pipeline trains a content-style disentangled diffusion model to generate synthetic ECGs, then validates their quality through multi-gate plausibility filtering, and finally evaluates augmentation utility through a three-regime protocol.
 
 ```
-Input: Patient ECG Signal
-         |
-         v
-+------------------------------------------+
-|  Phase 1: AFib Classifier (CNN-BiLSTM)  |
-|  Output: Classification (AFib/Normal)    |
-+------------------------------------------+
-         |
-         v
-+------------------------------------------+
-|  Phase 2/3: Counterfactual Generator     |
-|                                          |
-|  Content Encoder (C)                     |
-|    - Extracts temporal patterns          |
-|    - Preserves signal morphology         |
-|                                          |
-|  Style Encoder (S)                       |
-|    - Captures rhythm characteristics     |
-|    - Encodes class-specific features     |
-|                                          |
-|  Diffusion Denoiser                      |
-|    - Iterative refinement process        |
-|    - Condition: W1·C + W2·S              |
-|                                          |
-|  Effort Score = (W1, W2)                 |
-|    - Clinician-adjustable parameters     |
-|    - Controls transformation strength    |
-+------------------------------------------+
-         |
-         v
-Output: Counterfactual ECG + Explanation
-        "Minimal changes required for 
-         diagnostic flip"
+┌─────────────────────────────────────────────────────────────────────────┐
+│  1. DATA PREPARATION                                                    │
+│     MIMIC-IV ECG → Lead II → Resample (250 Hz) → Bandpass (0.5–40 Hz) │
+│     → Normalize [-1.5, 1.5] → Patient-level split (70/15/15)          │
+│     Output: 104,855 train / 22,469 val / 22,469 test segments          │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│  2. AFIB CLASSIFIER (ResNet-BiLSTM)                                     │
+│     Focal loss (α=0.65, γ=2.0) → Frozen after training                 │
+│     Used for: flip verification + style encoder guidance                │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│  3. DIFFUSION MODEL TRAINING (Two-Stage)                                │
+│                                                                         │
+│     Input ECG x₀ ──┬── Content Encoder (CNN+VAE) → c ∈ ℝ²⁵⁶           │
+│                     └── Style Encoder (CNN+InstanceNorm) → s ∈ ℝ¹²⁸    │
+│                                                                         │
+│     Stage 1 (Epochs 1–50):  Reconstruction                             │
+│       Loss = L_diff (MSE) + L_cls (CE) + L_KL                          │
+│                                                                         │
+│     Stage 2 (Epochs 51–100): Counterfactual fine-tuning                │
+│       Loss = L_diff + L_flip (frozen classifier) + L_morph (MSE to x₀) │
+│                                                                         │
+│     Conditional 1D UNet with classifier-free guidance (10% dropout)     │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│  4. COUNTERFACTUAL GENERATION & FILTERING                               │
+│     Partial-noise init (strength=0.6) → DDIM denoising (50 steps)      │
+│     → CFG scale w=3 → Savitzky-Golay smoothing                         │
+│                                                                         │
+│     Gate 1: Flip verification (classifier must predict target class y') │
+│     Gate 2: Plausibility score P ≥ 0.7                                  │
+│       P = 0.3·M(morphology) + 0.3·Φ(physiology) + 0.4·C(clinical dir.) │
+│                                                                         │
+│     Output: 7,784 accepted CFs / 22,469 generated (34.6% acceptance)   │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│  5. THREE-REGIME EVALUATION                                             │
+│     5-fold cross-validation on held-out test set (22,469 original ECGs) │
+│       A: Train on originals only                                        │
+│       B: Train on counterfactuals only (×3 with noise)                  │
+│       C: Train on 67% original + 33% counterfactual                     │
+│     Statistical testing: TOST equivalence, Non-inferiority, Dunnett's   │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Datasets
+## Results
 
-The research utilizes three primary datasets across different phases:
+### Generated Counterfactual ECG Examples
 
-**Classifier Training and Evaluation:**
+Each counterfactual ECG is generated via partial-noise initialization (60% noise), 50 DDIM steps with classifier-free guidance (scale 3.0), and filtered by the multi-stage plausibility validator (threshold 0.7).
 
-| Dataset | Description | Size | Sampling Rate |
-|---------|-------------|------|---------------|
-| PhysioNet 2017 | AF Classification Challenge | 8,528 recordings | 300 Hz |
-| MIT-BIH AFDB | Atrial Fibrillation Database | 48 subjects | 250 Hz |
+| **AFib → Normal Sinus Rhythm** | **Normal Sinus Rhythm → AFib** |
+|---|---|
+| ![AFib to Normal](diffusion_pipeline/final_pipeline/results/figures/counterfactual_examples/viz_AFib_to_Normal_001000.png) | ![Normal to AFib](diffusion_pipeline/final_pipeline/results/figures/counterfactual_examples/viz_Normal_to_AFib_001000.png) |
+| ![AFib to Normal 2](diffusion_pipeline/final_pipeline/results/figures/counterfactual_examples/viz_AFib_to_Normal_003000.png) | ![Normal to AFib 2](diffusion_pipeline/final_pipeline/results/figures/counterfactual_examples/viz_Normal_to_AFib_003000.png) |
 
-**Counterfactual Engine Training:**
+> 40 counterfactual examples available in [`diffusion_pipeline/final_pipeline/results/figures/counterfactual_examples/`](diffusion_pipeline/final_pipeline/results/figures/counterfactual_examples/)
 
-| Dataset | Description | Size | Sampling Rate |
-|---------|-------------|------|---------------|
-| MIMIC-IV ECG | Large-scale clinical database | 100,000+ subjects | Variable |
+### ECG Comparison
 
-### Preprocessing Pipeline
+![ECG Comparison](diffusion_pipeline/paper/figures/ecg_comparison.png)
 
-All ECG data undergoes standardized preprocessing:
+*Counterfactual ECG transformations. Normal→AFib (top rows) and AFib→Normal (bottom rows). Left: original; center: generated CF; right: overlay with Pearson correlation. Green badges show classifier predictions confirming successful class conversion.*
 
-1. Resampling to uniform 250 Hz sampling rate
-2. Multi-stage bandpass filtering (0.5-40 Hz)
-3. Segmentation into 10-second windows
-4. Z-score normalization
-5. Binary labeling (AFib vs. Normal Sinus Rhythm)
+### Training Progress
 
----
+**Stage 1** (epochs 1–50) trains reconstruction. **Stage 2** (epochs 51–100) introduces counterfactual fine-tuning.
 
-## Methodology
+| End of Stage 1 (Epoch 50) | End of Stage 2 (Epoch 100) |
+|---|---|
+| ![Reconstruction at epoch 50](diffusion_pipeline/final_pipeline/results/figures/training/epoch_050_reconstruction.png) | ![Counterfactual at epoch 100](diffusion_pipeline/final_pipeline/results/figures/training/epoch_100_counterfactual.png) |
 
-The research follows a six-phase development pipeline:
+### Signal Quality & Clinical Feature Analysis
 
-**Phase 1: Data Preparation and Preprocessing** (Completed)
-- Dataset integration and standardization
-- Signal quality assessment and filtering
-- Window segmentation and labeling
+| Metric | Overall | AFib → Normal | Normal → AFib |
+|--------|---------|---------------|---------------|
+| PSNR (dB) | 12.58 ± 2.09 | 12.32 ± 1.85 | 12.83 ± 2.28 |
+| SSIM | 0.471 ± 0.110 | 0.460 ± 0.096 | 0.480 ± 0.121 |
+| Plausibility Score | 0.76 ± 0.04 | — | — |
+| Max Nearest-Neighbor Correlation | 0.30 ± 0.07 | — | — |
 
-**Phase 2: Classifier Training** (Completed)
-- Architecture selection and implementation
-- Hyperparameter optimization
-- Performance benchmarking against state-of-the-art
+| Signal Quality Distributions | Clinical Feature Analysis |
+|---|---|
+| ![Signal quality](diffusion_pipeline/final_pipeline/results/figures/metrics/fig2_signal_quality_distributions.png) | ![Clinical features](diffusion_pipeline/final_pipeline/results/figures/metrics/fig3_clinical_features.png) |
 
-**Phase 3: Counterfactual Engine Training** (In Progress)
-- DiffStyleTS architecture implementation
-- Content and style encoder training
-- Diffusion transformer denoiser training
+### Augmentation Evaluation (5-Fold Cross-Validation)
 
-**Phase 4: Counterfactual Generation Backend** (Planned)
-- Effort score optimization algorithm
-- Real-time inference pipeline
-- Batch processing capabilities
+All classifiers evaluated on the same held-out test set of 22,469 original ECGs.
 
-**Phase 5: Evaluation and Validation** (Planned)
-- Quantitative metrics: flip rate, MSE, signal quality
-- Clinical validation with cardiologist review
-- Comparison against commercial AI systems (MUSE 12SL)
+| Performance Comparison | ROC Curves |
+|---|---|
+| ![Performance comparison](diffusion_pipeline/final_pipeline/results/figures/evaluation/performance_comparison_5fold.png) | ![ROC curves](diffusion_pipeline/final_pipeline/results/figures/evaluation/roc_curves_5fold.png) |
 
-**Phase 6: Interactive Clinician Interface** (Planned)
-- Web-based dashboard development
-- Real-time counterfactual generation
-- Visualization and interpretation tools
+| Confusion Matrices | Training Curves |
+|---|---|
+| ![Confusion matrices](diffusion_pipeline/final_pipeline/results/figures/evaluation/confusion_matrices_5fold.png) | ![Training curves](diffusion_pipeline/final_pipeline/results/figures/evaluation/training_curves_5fold.png) |
 
----
+### Statistical Equivalence Testing (TOST)
 
-## Research Contributions
+| Test | N | Result | p-value |
+|---|---|---|---|
+| McNemar's test | 22,469 | Δ = 0.54% | < 0.001 |
+| TOST equivalence (±2%) | 22,469 | **Equivalent** | < 0.001 |
+| Non-inferiority (2%) | 22,469 | **Non-inferior** | < 0.001 |
+| Dunnett's (A vs C) | 5 | No sig. diff. | 0.340 |
+| Dunnett's (A vs B) | 5 | Sig. diff. | < 0.001 |
 
-### 1. Counterfactual Effort Score
+**Conclusion:** Filtered counterfactuals can safely supplement training data without measurable performance loss.
 
-A novel, interpretable metric that quantifies the "strength" of counterfactual transformation. Clinicians can adjust W1 (content preservation) and W2 (style transfer) to explore different scenarios:
-
-- Low effort (W1≈1.0, W2≈0.0): Minimal modifications, subtle risk indicators
-- High effort (W1≈0.0, W2≈1.0): Maximum transformation, clear diagnostic boundary
-
-This provides a continuous risk assessment beyond binary classification.
-
-### 2. Disentangled Diffusion Architecture
-
-Our DiffStyleTS implementation addresses fundamental limitations of prior counterfactual generation methods:
-
-**Problem with Path 1 (Heuristic/Prototype Methods):**
-- Cut-and-paste stitching creates temporal misalignment
-- Produces artifacts at transition points
-- Not truly generative - cannot learn data distribution
-
-**Problem with Path 2 (VAE-based Methods):**
-- Posterior collapse during training
-- Blurry signal reconstruction
-- Entangled latent space representations
-- Limited sample quality
-
-**Our Solution (Path 3 - Diffusion Models):**
-- High-fidelity generation through iterative denoising
-- Enforced disentanglement via architectural design
-- Provable interpretability through content-style separation
-- State-of-the-art sample quality
-
-### 3. Clinical Trust Bridge
-
-Unlike standard XAI techniques that show attribution (where the model looked), our system provides:
-
-- Concrete examples of what would change for different diagnoses
-- Interactive exploration of diagnostic boundaries
-- Quantifiable risk assessment through effort scores
-- Physiologically plausible signal modifications
-
-This addresses the fundamental clinical need to understand not just model predictions, but the reasoning behind them.
+| Augmentation Viability | Pairwise Differences |
+|---|---|
+| ![Viability](diffusion_pipeline/final_pipeline/results/figures/evaluation/augmentation_viability_summary.png) | ![Pairwise](diffusion_pipeline/final_pipeline/results/figures/evaluation/augmentation_pairwise_differences.png) |
 
 ---
 
-## Evaluation Framework
+## Dataset
 
-### Quantitative Metrics
+| Property | Value |
+|----------|-------|
+| Source | [MIMIC-IV ECG](https://physionet.org/content/mimic-iv-ecg/1.0/) (PhysioNet) |
+| Lead | Lead II |
+| Sampling rate | 250 Hz (resampled from 500 Hz) |
+| Segment length | 10 seconds (2,500 samples) |
+| Normalization | Global min-max to [−1.5, 1.5] |
+| Filtering | Bandpass 0.5–40 Hz (NeuroKit2) |
 
-**Counterfactual Quality:**
-- Classification flip rate: Percentage of successful diagnostic reversals
-- Mean Squared Error (MSE): Signal fidelity measurement
-- Temporal Dynamic Warping (DTW): Shape preservation
-- Frechet Inception Distance (FID): Distributional similarity
+| Partition | Segments | Normal / AFib |
+|---|---|---|
+| Training | 104,855 | 52,447 / 52,408 |
+| Validation | 22,469 | 11,239 / 11,230 |
+| Test | 22,469 | 11,239 / 11,230 |
+| **Total** | **149,793** | **74,925 / 74,868** |
 
-**Clinical Validation:**
-- Expert cardiologist review of counterfactual realism
-- Comparison against commercial AI (MUSE 12SL from GE Healthcare)
-- Ablation studies on effort score impact
-- User study with clinicians on interpretability
-
-### Validation Plan
-
-We will augment our Phase 1 training dataset with synthetically generated counterfactuals and demonstrate classifier performance improvement, validating both the quality of generated signals and their utility for data augmentation.
-
----
-
-## Technical Implementation
-
-**Core Frameworks:**
-- PyTorch 2.0+ for deep learning
-- NeuroKit2, SciPy, NumPy for signal processing
-- Pandas for data management
-- WFDB for ECG format handling
-- Weights & Biases for experiment tracking
-
-**Model Architectures:**
-- Classifier: CNN-BiLSTM with multi-head attention
-- Generator (Current): CoFE/VAE with gradient-based optimization
-- Generator (Target): DiffStyleTS disentangled diffusion model
-
-**Deployment Stack (Planned):**
-- Backend: FastAPI for REST API
-- Frontend: Streamlit for rapid prototyping
-- Containerization: Docker
-- Demonstration: Hugging Face Spaces
+| Dataset Distribution | ECG Samples | Train/Val/Test Split |
+|---|---|---|
+| ![Distribution](diffusion_pipeline/final_pipeline/results/figures/dataset_overview/final_distribution.png) | ![ECG samples](diffusion_pipeline/final_pipeline/results/figures/dataset_overview/ecg_samples_clinical_range.png) | ![Split](diffusion_pipeline/final_pipeline/results/figures/dataset_overview/train_val_test_split.png) |
 
 ---
 
-## Research Context
-
-### Problem Statement
-
-Atrial Fibrillation affects over 60 million people worldwide and contributes to approximately 454,000 deaths annually. While AI-based detection systems achieve high accuracy, their clinical adoption remains limited due to interpretability concerns. Physicians require transparent, verifiable explanations before trusting AI recommendations for patient care decisions.
-
-### Research Gaps Addressed
-
-We identified three critical limitations in existing AFib AI systems:
-
-1. **Binary vs. Continuous Risk**: Current systems output discrete classifications without quantifying diagnostic certainty or progression risk
-2. **Static vs. Dynamic Explanation**: No mechanism for interactive exploration of diagnostic boundaries
-3. **Unrealistic Generation**: Prior counterfactual methods produce physiologically implausible signals through stitching or suffer from VAE blurriness
-
-Our research directly addresses all three gaps through the DiffStyleTS architecture and interactive effort score mechanism.
-
----
-
-## Literature Review Summary
-
-### Foundational References
-
-**Counterfactual Generation:**
-- Kapsecker et al. (2025): "CoFE: A Framework Generating Counterfactual ECG for Explainable Cardiac AI-Diagnostics" - arXiv:2508.16033
-- Nagda et al. (2025): "DiffStyleTS: Diffusion Model for Style Transfer in Time Series"
-- Jang et al. (2025): "A novel XAI framework using generative counterfactual XAI (GCX)" - arXiv
-
-**AFib Detection Benchmarks:**
-- Jia et al. (2020): ResNet-BiLSTM-Attention achieving 98.11% accuracy
-- Petmezas et al. (2021): CNN-LSTM with Focal Loss achieving 99.29% specificity
-- Andersen et al. (2019): Hybrid CNN-LSTM achieving 97.8% accuracy
-
-**XAI for ECG:**
-- Hicks et al. (2021): "Explaining deep neural networks for knowledge discovery in electrocardiogram analysis" - Nature Communications
-- Tanyel et al. (2023): "VCCE - Counterfactual ECG via Prototypes"
-- Thambawita et al. (2021): Deep learning for ECG interpretation
-
-### Critical Evaluation
-
-We performed a systematic review of counterfactual generation approaches, categorizing them into three paths:
-
-1. **Heuristic/Prototype Methods**: Simple but non-generative, creating temporal artifacts
-2. **Latent Space Methods (VAE)**: Generative but suffer from quality issues
-3. **Diffusion/Style Transfer**: State-of-the-art quality with provable interpretability
-
-Our work builds on Path 3, implementing the most recent advances in diffusion-based time series generation.
-
----
-
-## Timeline
+## Repository Structure
 
 ```
-2025 Q1  [Completed]  Phase 1: Data Pipeline + Classifier Training
-2025 Q2  [Completed]  Phase 2: CoFE/VAE Prototype Validation
-2025 Q3  [Current]    Phase 3: DiffStyleTS Implementation
-2025 Q4  [Planned]    Phase 4: Backend Optimization
-2026 Q1  [Planned]    Phase 5: Clinical Validation
-2026 Q2  [Planned]    Phase 6: Interactive Dashboard + Thesis Defense
+e20-fyp-ai-atrial-fib-detection/
+│
+├── diffusion_pipeline/                     # Diffusion-based augmentation pipeline
+│   ├── final_pipeline/                     # ← START HERE: organized final pipeline
+│   │   ├── README.md                       #   Execution guide and results
+│   │   ├── src/                            #   All source code
+│   │   │   ├── data_preparation.py         #     MIMIC-IV ECG loading & preprocessing
+│   │   │   ├── classifier/                 #     ResNet-BiLSTM architecture & training
+│   │   │   ├── diffusion/                  #     Two-stage diffusion model training
+│   │   │   ├── generation/                 #     Counterfactual generation & filtering
+│   │   │   ├── evaluation/                 #     Three-regime evaluation & statistics
+│   │   │   └── utils/                      #     Shared model components
+│   │   └── results/
+│   │       ├── figures/                    #   All visualizations (73 figures)
+│   │       └── metrics/                    #   Evaluation results (JSON)
+│   │
+│   ├── notebooks/                          # Development notebooks
+│   ├── paper/                              # Research paper (LaTeX, PDF, figures)
+│   ├── src/                                # Original source modules
+│   └── scripts/                            # Helper scripts
+│
+├── Pipeline_Implementation/                # Phase 1: Classifier architecture experiments
+├── pipeline_with_WGAN_XAI/                 # Earlier WGAN-based exploration
+├── docs/                                   # GitHub Pages project page
+└── week_4/, week_5/                        # Weekly progress logs
 ```
 
 ---
 
-## Current Development Status
+## Reproducing Results
 
-As of November 2025, we are actively working on Phase 3 - implementing the DiffStyleTS architecture. Specific tasks include:
+All scripts are in [`diffusion_pipeline/final_pipeline/src/`](diffusion_pipeline/final_pipeline/src/). Run in order:
 
-- Training content and style encoders on MIMIC-IV ECG dataset
-- Implementing diffusion transformer denoiser
-- Developing effort score interpolation mechanism
-- Establishing evaluation pipeline for counterfactual quality assessment
+```bash
+# 1. Data preparation — load MIMIC-IV, preprocess, split
+python src/data_preparation.py
 
-The CoFE/VAE prototype has successfully validated our approach, achieving 90% classification flip rate with minimal signal distortion. We are now advancing to the diffusion-based architecture to improve generation quality and provide stronger interpretability guarantees.
+# 2. Train AFib classifier (ResNet-BiLSTM)
+python src/classifier/train_classifier.py
+
+# 3. Train diffusion model (two-stage, ~100 epochs)
+python src/diffusion/train_diffusion.py
+
+# 4. Generate counterfactual ECGs with plausibility filtering
+python src/generation/generate_counterfactuals.py
+
+# 5. Evaluate augmentation viability
+python src/evaluation/three_way_evaluation.py      # Three-regime 5-fold CV
+python src/evaluation/comprehensive_metrics.py      # Signal quality metrics
+python src/evaluation/statistical_analysis.py       # TOST equivalence testing
+```
+
+**Hardware:** NVIDIA RTX 6000 Ada Generation (48 GB VRAM)  
+**Training time:** ~21.6 hours (both stages combined)  
+**Generation time:** ~4 hours for 22,469 samples  
+**Model size:** 19.1M parameters  
+**Dependencies:** PyTorch 2.0+, NumPy, SciPy, pandas, matplotlib, seaborn, NeuroKit2, wfdb, tqdm
+
+> Model weights (`.pth`), datasets (`.npz`), and logs (`.log`) are excluded from this repository due to size. Trained weights are available on [HuggingFace Model Hub](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation).
 
 ---
 
-## Collaboration and Contact
+## Resources
 
-This research is part of the EU-funded SEARCH Initiative (www.search-project.eu), which develops AI-powered solutions for cardiovascular disease detection and monitoring.
-
-**Primary Supervisors:**  
-
-Dr. Vajira Thambawita  
-Senior Researcher, SimulaMet, Oslo, Norway  
-Website: https://vajira.info/  
-Email: vajira@simula.no  
-Twitter: @vlbthambawita
-
-Dr. Molly Maleckar  
-Research Professor, SimulaMet, Oslo, Norway  
-Website: https://www.simulamet.no/  
-Email: molly@simula.no
-
-**Student Researchers:**  
-Dilshan D.M.T. - e20069@eng.pdn.ac.lk  
-Karunarathne K.N.P. - e20189@eng.pdn.ac.lk
+| Resource | Link |
+|---|---|
+| 🤗 Model Hub | [TharakaDil2001/diffusion-ecg-augmentation](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation) |
+| 🤗 Live Demo | [ecg-augmentation-demo](https://huggingface.co/spaces/TharakaDil2001/ecg-augmentation-demo) |
+| 📄 Research Paper | [Paper PDF](diffusion_pipeline/paper/paper.pdf) |
+| 🌐 Project Page | [cepdnaclk.github.io/e20-fyp-ai-atrial-fib-detection](https://cepdnaclk.github.io/e20-fyp-ai-atrial-fib-detection/) |
 
 ---
 
 ## Acknowledgments
 
-We acknowledge the support of:
-- SimulaMet (Oslo, Norway) for research guidance and computational resources
-- EU SEARCH Initiative for funding and consortium collaboration
-- University of Peradeniya for academic infrastructure
-- PhysioNet, MIT-BIH, and MIMIC-IV teams for open-access datasets
+This work is part of the European project **SEARCH**, supported by the Innovative Health Initiative Joint Undertaking (IHI JU) under grant agreement No. 101172997. The JU receives support from the European Union's Horizon Europe research and innovation programme and COCIR, EFPIA, Europa Bio, MedTech Europe, Vaccines Europe, and additional partners.
 
 ---
 
-## Citation
+## References
 
-If you use this work in your research, please cite:
-
-```bibtex
-@misc{pera_af_detection_2025,
-  title={Explainable AI for Counterfactual Simulation of Cardiac Arrhythmias},
-  author={Dilshan, D.M.T. and Karunarathne, K.N.P.},
-  year={2025},
-  institution={University of Peradeniya, Sri Lanka},
-  collaboration={SimulaMet, Oslo, Norway},
-  note={EU-funded SEARCH Initiative}
-}
-```
+1. Ho, J., Jain, A., & Abbeel, P. (2020). "Denoising diffusion probabilistic models." *NeurIPS*.
+2. Song, J., Meng, C., & Ermon, S. (2021). "Denoising diffusion implicit models." *ICLR*.
+3. Ho, J. & Salimans, T. (2022). "Classifier-free diffusion guidance." *NeurIPS Workshop*.
+4. Nagda, M. et al. (2025). "DiffStyleTS: Diffusion model for style transfer in time series."
+5. Schuirmann, D. J. (1987). "A comparison of the two one-sided tests procedure." *J. Pharmacokinet. Biopharm.*
+6. Thambawita, V. et al. (2021). "DeepFake electrocardiograms." *Sci. Rep.*
 
 ---
 
 ## Related Work
 
-Dr. Vajira Thambawita's related projects:
-- [deepfake-ecg](https://github.com/vlbthambawita/deepfake-ecg) - Unlimited realistic ECG generator
-- [Pulse2Pulse](https://github.com/vlbthambawita/Pulse2Pulse) - DeepFake ECG generation framework
+- [deepfake-ecg](https://github.com/vlbthambawita/deepfake-ecg) — Realistic ECG generation
+- [Pulse2Pulse](https://github.com/vlbthambawita/Pulse2Pulse) — DeepFake ECG framework
+- [SEARCH Project](https://www.search-project.eu/) — EU cardiovascular AI initiative
 
-External initiatives:
-- [SEARCH Project](https://www.search-project.eu/) - EU cardiovascular AI initiative
+---
+
+## Contact
+
+**Supervisors:**  
+Dr. Vajira Thambawita — [vajira.info](https://vajira.info/) · vajira@simula.no  
+Prof. Mary M. Maleckar — Tulane University / Simula Research Laboratory
+
+**Student Researchers:**  
+Tharaka Dilshan — [e20069@eng.pdn.ac.lk](mailto:e20069@eng.pdn.ac.lk) · [LinkedIn](https://www.linkedin.com/in/tharaka-dilshan-237a8b345/)  
+Nethmini Karunarathne — [e20189@eng.pdn.ac.lk](mailto:e20189@eng.pdn.ac.lk) · [LinkedIn](https://www.linkedin.com/in/nethmini-karunarathne-b20460206/)
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-*Last Updated: November 2025*  
-*Research Status: Active Development (Phase 3)*  
-*Expected Completion: June 2026*
+Apache License 2.0 — see [LICENSE](LICENSE) for details.

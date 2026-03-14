@@ -1,0 +1,199 @@
+{
+  "signal_quality": {
+    "overall": {
+      "psnr_mean": 12.58045768737793,
+      "psnr_std": 2.0935280323028564,
+      "ssim_mean": 0.47056144461067106,
+      "ssim_std": 0.10975229169200726,
+      "snr_mean": -1.6549042463302612,
+      "snr_std": 0.9223361015319824,
+      "correlation_mean": 0.18553274869918823,
+      "correlation_std": 0.14293958246707916,
+      "mse_mean": 0.0052343697400065135,
+      "mse_std": 0.004490490599171834,
+      "mae_mean": 0.04132348581310362,
+      "mae_std": 0.015443659047193841,
+      "max_error_mean": 0.3159622458033264,
+      "max_error_std": 0.15062915112365174
+    },
+    "normal_to_afib": {
+      "psnr_mean": 12.316827774047852,
+      "psnr_std": 1.8464734554290771,
+      "ssim_mean": 0.4603709939560538,
+      "ssim_std": 0.09609579498991713
+    },
+    "afib_to_normal": {
+      "psnr_mean": 12.831229209899902,
+      "psnr_std": 2.275912046432495,
+      "ssim_mean": 0.4802548001114045,
+      "ssim_std": 0.12052741808140298
+    }
+  },
+  "clinical_validation": {
+    "rr_interval_analysis": {
+      "original_rr_cv_mean": 0.1838244156922794,
+      "original_rr_cv_std": 0.13853939481794353,
+      "counterfactual_rr_cv_mean": 0.27966856789598726,
+      "counterfactual_rr_cv_std": 0.0962930222967853,
+      "rr_direction_correct_n2a": 0.9230769230769231,
+      "rr_direction_correct_a2n": 0.44682926829268294,
+      "rr_direction_correct_overall": 0.679
+    },
+    "heart_rate": {
+      "original_hr_mean": 101.69466293819839,
+      "original_hr_std": 26.350907024135246,
+      "counterfactual_hr_mean": 99.41018443768266,
+      "counterfactual_hr_std": 22.820061272175085,
+      "hr_in_physiological_range_pct": 1.0
+    },
+    "spectral_analysis": {
+      "spectral_similarity_mean": 0.0,
+      "spectral_similarity_std": 0.0
+    },
+    "plausibility": {
+      "mean_score": 0.6818676101888527,
+      "std_score": 0.108808984307781,
+      "above_0_7_pct": 0.6410165116382571,
+      "above_0_5_pct": 0.99092082424674,
+      "n2a_mean": 0.7557144763769017,
+      "a2n_mean": 0.6079615612941526
+    },
+    "generation_stats": {
+      "mean_attempts": 1.8352396635364279,
+      "n2a_mean_attempts": 1.0457336061927218,
+      "a2n_mean_attempts": 2.6253784505788067,
+      "single_attempt_pct": 0.5565445725221416
+    }
+  },
+  "classifier_metrics": {
+    "flip_rate": {
+      "normal_to_afib": 0.15063617759587153,
+      "afib_to_normal": 0.6643811219946572,
+      "overall": 0.40740575904579646
+    },
+    "original_accuracy": 0.8201077039476612,
+    "fid_approximate": -1.0,
+    "classifier_confidence": {
+      "n2a_mean_target_prob": 0.21902964860982094,
+      "a2n_mean_target_prob": 0.6195132001408419
+    }
+  },
+  "statistical_tests": {
+    "rr_cv_comparison": {
+      "t_test": {
+        "statistic": -25.398761042472433,
+        "p_value": 4.6124533960489494e-132
+      },
+      "mann_whitney": {
+        "statistic": 1200281.0,
+        "p_value": 2.687337293495889e-106
+      },
+      "ks_test": {
+        "statistic": 0.3815,
+        "p_value": 4.554678478336004e-130
+      }
+    },
+    "hr_comparison": {
+      "t_test": {
+        "statistic": 2.9301031228963237,
+        "p_value": 0.0034076752600841545
+      }
+    },
+    "signal_quality_tests": {
+      "psnr_vs_20db": 0.0045,
+      "ssim_vs_0_5": 0.393,
+      "correlation_vs_0_3": 0.1735
+    }
+  },
+  "model_architecture": {
+    "model_name": "Enhanced Diffusion Counterfactual Generator",
+    "components": {
+      "content_encoder": {
+        "type": "Conv1D + BatchNorm + VAE",
+        "input": "(1, 2500)",
+        "output_dim": 256,
+        "hidden_dim": 64,
+        "params": 4273408
+      },
+      "style_encoder": {
+        "type": "Conv1D + InstanceNorm + Classifier",
+        "input": "(1, 2500)",
+        "output_dim": 128,
+        "hidden_dim": 64,
+        "params": 566786
+      },
+      "conditional_unet": {
+        "type": "UNet with FiLM conditioning",
+        "input": "(1, 2500)",
+        "channels": "64\u2192128\u2192256\u2192512",
+        "attention_resolutions": [
+          2,
+          3
+        ],
+        "params": 14271489
+      },
+      "ddim_scheduler": {
+        "type": "DDIM with cosine schedule",
+        "timesteps": 1000,
+        "inference_steps": 50,
+        "sdedit_strength": 0.6,
+        "cfg_scale": 3.0
+      }
+    },
+    "total_parameters": 19111683,
+    "training": {
+      "total_epochs": 100,
+      "stage1_epochs": 50,
+      "stage2_epochs": 50,
+      "training_time_hours": 21.635153891245523,
+      "optimizer": "Adam",
+      "learning_rate": 0.0001,
+      "batch_size": 16,
+      "gpu": "NVIDIA A100 (49GB)"
+    }
+  },
+  "dataset_statistics": {
+    "source": "MIMIC-IV ECG Database",
+    "sampling_rate_hz": 250,
+    "signal_length_samples": 2500,
+    "signal_duration_seconds": 10,
+    "splits": {
+      "train": {
+        "total": 104855,
+        "normal": 52447,
+        "afib": 52408
+      },
+      "validation": {
+        "total": 22469,
+        "normal": 11239,
+        "afib": 11230
+      },
+      "test": {
+        "total": 22469,
+        "normal": 11239,
+        "afib": 11230
+      }
+    },
+    "counterfactual_generated": {
+      "total": 22469,
+      "normal_to_afib": 11239,
+      "afib_to_normal": 11230
+    },
+    "signal_statistics": {
+      "original_mean": 0.00903777964413166,
+      "original_std": 0.06184444949030876,
+      "original_min": -1.346258282661438,
+      "original_max": 1.5,
+      "cf_mean": 0.008869325742125511,
+      "cf_std": 0.05977623909711838,
+      "cf_min": -1.3019222021102905,
+      "cf_max": 1.575884222984314
+    }
+  },
+  "figures_generated": [
+    "fig1_counterfactual_examples.png",
+    "fig2_signal_quality_distributions.png",
+    "fig3_clinical_features.png",
+    "fig4_flip_rate_analysis.png"
+  ]
+}

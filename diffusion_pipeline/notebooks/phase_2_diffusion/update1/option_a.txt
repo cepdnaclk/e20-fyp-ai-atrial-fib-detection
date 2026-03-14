@@ -1,0 +1,963 @@
+================================================================================
+LOADING PHASE 1 CLASSIFIER FOR PERCEPTUAL LOSS
+================================================================================
+✅ Classifier loaded from: best_model.pth
+   Device: cuda
+   Parameters frozen: ✅
+
+================================================================================
+INITIALIZING VAE
+================================================================================
+
+🆕 Starting fresh training (no checkpoint loading)
+   Training for 60 epochs
+
+================================================================================
+SETTING UP TRAINING
+================================================================================
+PerceptualVAELoss initialized:
+  Lambda perceptual: 0.8
+  Classifier frozen: ✅
+AMP: Enabled
+
+Optimizer: Adam
+  Learning rate: 5e-05
+  Betas: (0.9, 0.999)
+...
+Steps per epoch: 1639
+
+⏱️  Estimated total time: ~4 hours
+   (60 epochs × 4 min/epoch)
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...
+
+===================================================================================
+Epoch 1/60: 100%
+ 1639/1639 [03:24<00:00,  8.24it/s, total=1.0403, recon=0.1245, kl=615.14, percept=1.068]
+Validation: 100%
+ 352/352 [00:57<00:00,  6.90it/s, total=0.8454, recon=0.0547, kl=386.26, percept=0.940]
+
+Epoch 1/60 - 262.2s
+  Train - Total: 1.040274, Recon: 0.124485, KL: 615.136609, Percept: 1.0678
+  Val   - Total: 0.845372, Recon: 0.054714, KL: 386.256093, Percept: 0.9400
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.845372
+Epoch 2/60: 100%
+ 1639/1639 [03:20<00:00,  8.40it/s, total=0.7912, recon=0.0479, kl=373.18, percept=0.882]
+Validation: 100%
+ 352/352 [00:57<00:00,  6.00it/s, total=0.7410, recon=0.0437, kl=364.63, percept=0.826]
+
+Epoch 2/60 - 258.2s
+  Train - Total: 0.791181, Recon: 0.047890, KL: 373.176893, Percept: 0.8825
+  Val   - Total: 0.741003, Recon: 0.043748, KL: 364.626863, Percept: 0.8260
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.741003
+Epoch 3/60: 100%
+ 1639/1639 [03:20<00:00,  8.47it/s, total=0.6800, recon=0.0389, kl=360.83, percept=0.756]
+Validation: 100%
+ 352/352 [00:56<00:00,  6.18it/s, total=0.5848, recon=0.0324, kl=357.07, percept=0.646]
+
+Epoch 3/60 - 257.2s
+  Train - Total: 0.679955, Recon: 0.038879, KL: 360.833718, Percept: 0.7562
+  Val   - Total: 0.584773, Recon: 0.032367, KL: 357.069230, Percept: 0.6459
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.584773
+Epoch 4/60: 100%
+ 1639/1639 [03:34<00:00,  6.44it/s, total=0.5501, recon=0.0286, kl=350.14, percept=0.608]
+Validation: 100%
+ 352/352 [00:59<00:00,  5.71it/s, total=0.5191, recon=0.0263, kl=343.57, percept=0.573]
+
+Epoch 4/60 - 274.3s
+  Train - Total: 0.550146, Recon: 0.028626, KL: 350.142035, Percept: 0.6081
+  Val   - Total: 0.519132, Recon: 0.026337, KL: 343.570322, Percept: 0.5730
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.519132
+Epoch 5/60: 100%
+ 1639/1639 [03:23<00:00,  8.47it/s, total=0.5170, recon=0.0251, kl=340.35, percept=0.572]
+Validation: 100%
+ 352/352 [01:01<00:00,  6.27it/s, total=0.4952, recon=0.0242, kl=339.56, percept=0.546]
+
+Epoch 5/60 - 264.7s
+  Train - Total: 0.516989, Recon: 0.025122, KL: 340.345593, Percept: 0.5723
+  Val   - Total: 0.495182, Recon: 0.024248, KL: 339.555647, Percept: 0.5462
+  LR: 0.000050
+  💾 Checkpoint saved: vae_60ep_epoch_5.pth
+  🎉 New best model! Val loss: 0.495182
+Epoch 6/60: 100%
+ 1639/1639 [03:14<00:00,  8.50it/s, total=0.5018, recon=0.0241, kl=337.49, percept=0.555]
+Validation: 100%
+ 352/352 [01:01<00:00,  6.29it/s, total=0.4935, recon=0.0236, kl=336.55, percept=0.545]
+
+Epoch 6/60 - 256.1s
+  Train - Total: 0.501758, Recon: 0.024073, KL: 337.486773, Percept: 0.5549
+  Val   - Total: 0.493531, Recon: 0.023595, KL: 336.551979, Percept: 0.5454
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.493531
+Epoch 7/60: 100%
+ 1639/1639 [03:13<00:00,  8.54it/s, total=0.4895, recon=0.0235, kl=336.02, percept=0.540]
+Validation: 100%
+ 352/352 [01:01<00:00,  6.31it/s, total=0.4764, recon=0.0235, kl=333.59, percept=0.524]
+
+Epoch 7/60 - 254.8s
+  Train - Total: 0.489498, Recon: 0.023503, KL: 336.016121, Percept: 0.5405
+  Val   - Total: 0.476420, Recon: 0.023475, KL: 333.588433, Percept: 0.5245
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.476420
+Epoch 8/60: 100%
+ 1639/1639 [03:12<00:00,  8.67it/s, total=0.4800, recon=0.0231, kl=334.61, percept=0.529]
+Validation: 100%
+ 352/352 [01:02<00:00,  5.65it/s, total=0.4712, recon=0.0228, kl=333.41, percept=0.519]
+
+Epoch 8/60 - 255.0s
+  Train - Total: 0.479985, Recon: 0.023072, KL: 334.610896, Percept: 0.5293
+  Val   - Total: 0.471206, Recon: 0.022847, KL: 333.406487, Percept: 0.5188
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.471206
+Epoch 9/60: 100%
+ 1639/1639 [04:28<00:00,  6.68it/s, total=0.4716, recon=0.0228, kl=333.55, percept=0.519]
+Validation: 100%
+ 352/352 [01:13<00:00,  4.60it/s, total=0.4690, recon=0.0227, kl=331.92, percept=0.516]
+
+Epoch 9/60 - 342.5s
+  Train - Total: 0.471603, Recon: 0.022776, KL: 333.550177, Percept: 0.5193
+  Val   - Total: 0.469008, Recon: 0.022682, KL: 331.918718, Percept: 0.5164
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.469008
+Epoch 10/60: 100%
+ 1639/1639 [04:20<00:00,  6.96it/s, total=0.4631, recon=0.0225, kl=332.42, percept=0.509]
+Validation: 100%
+ 352/352 [01:11<00:00,  2.99it/s, total=0.4579, recon=0.0225, kl=331.03, percept=0.503]
+
+Epoch 10/60 - 331.6s
+  Train - Total: 0.463056, Recon: 0.022495, KL: 332.415541, Percept: 0.5091
+  Val   - Total: 0.457895, Recon: 0.022495, KL: 331.032520, Percept: 0.5029
+  LR: 0.000050
+  💾 Checkpoint saved: vae_60ep_epoch_10.pth
+  🎉 New best model! Val loss: 0.457895
+
+  ============================================================
+  🎯 MILESTONE: Epoch 10/60
+  ============================================================
+     Perceptual loss: 0.5029
+     Best val loss:   0.457895
+     Progress:        16.7%
+     Trend:           ⬇️ Improving (-0.4372 over last 10 epochs)
+Epoch 11/60: 100%
+ 1639/1639 [03:45<00:00,  8.65it/s, total=0.4540, recon=0.0223, kl=331.09, percept=0.498]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.30it/s, total=0.4357, recon=0.0220, kl=330.20, percept=0.476]
+
+Epoch 11/60 - 281.6s
+  Train - Total: 0.454016, Recon: 0.022266, KL: 331.091006, Percept: 0.4983
+  Val   - Total: 0.435669, Recon: 0.022037, KL: 330.204992, Percept: 0.4758
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.435669
+Epoch 12/60: 100%
+ 1639/1639 [03:13<00:00,  8.07it/s, total=0.4424, recon=0.0220, kl=329.40, percept=0.484]
+Validation: 100%
+ 352/352 [00:58<00:00,  6.31it/s, total=0.4303, recon=0.0218, kl=329.48, percept=0.469]
+
+Epoch 12/60 - 252.3s
+  Train - Total: 0.442443, Recon: 0.022028, KL: 329.404780, Percept: 0.4843
+  Val   - Total: 0.430266, Recon: 0.021780, KL: 329.475191, Percept: 0.4694
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.430266
+Epoch 13/60: 100%
+ 1639/1639 [03:13<00:00,  8.89it/s, total=0.4344, recon=0.0218, kl=328.38, percept=0.475]
+Validation: 100%
+ 352/352 [00:56<00:00,  6.24it/s, total=0.4217, recon=0.0215, kl=328.75, percept=0.459]
+
+Epoch 13/60 - 250.7s
+  Train - Total: 0.434381, Recon: 0.021817, KL: 328.384216, Percept: 0.4747
+  Val   - Total: 0.421745, Recon: 0.021538, KL: 328.747031, Percept: 0.4592
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.421745
+Epoch 14/60: 100%
+ 1639/1639 [03:07<00:00,  8.75it/s, total=0.4268, recon=0.0216, kl=327.15, percept=0.466]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.33it/s, total=0.4206, recon=0.0217, kl=324.81, percept=0.458]
+
+Epoch 14/60 - 243.0s
+  Train - Total: 0.426832, Recon: 0.021631, KL: 327.149231, Percept: 0.4656
+  Val   - Total: 0.420575, Recon: 0.021711, KL: 324.810876, Percept: 0.4580
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.420575
+Epoch 15/60: 100%
+ 1639/1639 [03:08<00:00,  8.64it/s, total=0.4238, recon=0.0215, kl=326.10, percept=0.462]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.32it/s, total=0.4172, recon=0.0214, kl=324.57, percept=0.454]
+
+Epoch 15/60 - 244.2s
+  Train - Total: 0.423759, Recon: 0.021468, KL: 326.095680, Percept: 0.4621
+  Val   - Total: 0.417194, Recon: 0.021386, KL: 324.572916, Percept: 0.4542
+  LR: 0.000050
+  💾 Checkpoint saved: vae_60ep_epoch_15.pth
+  🎉 New best model! Val loss: 0.417194
+Epoch 16/60: 100%
+ 1639/1639 [03:07<00:00,  8.86it/s, total=0.4225, recon=0.0213, kl=325.40, percept=0.461]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.30it/s, total=0.4164, recon=0.0213, kl=322.52, percept=0.454]
+
+Epoch 16/60 - 242.7s
+  Train - Total: 0.422515, Recon: 0.021346, KL: 325.401518, Percept: 0.4608
+  Val   - Total: 0.416401, Recon: 0.021324, KL: 322.520026, Percept: 0.4535
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.416401
+Epoch 17/60: 100%
+ 1639/1639 [03:06<00:00,  8.74it/s, total=0.4193, recon=0.0212, kl=324.45, percept=0.457]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.26it/s, total=0.4147, recon=0.0210, kl=323.59, percept=0.452]
+
+Epoch 17/60 - 241.9s
+  Train - Total: 0.419337, Recon: 0.021216, KL: 324.445921, Percept: 0.4571
+  Val   - Total: 0.414733, Recon: 0.021045, KL: 323.588266, Percept: 0.4517
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.414733
+Epoch 18/60: 100%
+ 1639/1639 [03:06<00:00,  8.74it/s, total=0.4200, recon=0.0211, kl=323.62, percept=0.458]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.30it/s, total=0.4139, recon=0.0210, kl=323.36, percept=0.451]
+
+Epoch 18/60 - 241.8s
+  Train - Total: 0.420005, Recon: 0.021121, KL: 323.615668, Percept: 0.4582
+  Val   - Total: 0.413899, Recon: 0.021046, KL: 323.356154, Percept: 0.4506
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.413899
+Epoch 19/60: 100%
+ 1639/1639 [03:06<00:00,  8.80it/s, total=0.4180, recon=0.0210, kl=322.89, percept=0.456]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.26it/s, total=0.4117, recon=0.0206, kl=325.57, percept=0.448]
+
+Epoch 19/60 - 242.2s
+  Train - Total: 0.417974, Recon: 0.021035, KL: 322.885375, Percept: 0.4558
+  Val   - Total: 0.411674, Recon: 0.020611, KL: 325.574155, Percept: 0.4481
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.411674
+Epoch 20/60: 100%
+ 1639/1639 [03:06<00:00,  8.82it/s, total=0.4208, recon=0.0210, kl=322.30, percept=0.459]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.32it/s, total=0.4174, recon=0.0209, kl=320.68, percept=0.456]
+
+Epoch 20/60 - 241.7s
+  Train - Total: 0.420758, Recon: 0.020968, KL: 322.301420, Percept: 0.4595
+  Val   - Total: 0.417371, Recon: 0.020869, KL: 320.675094, Percept: 0.4555
+  LR: 0.000050
+  💾 Checkpoint saved: vae_60ep_epoch_20.pth
+
+  ============================================================
+  🎯 MILESTONE: Epoch 20/60
+  ============================================================
+     Perceptual loss: 0.4555
+     Best val loss:   0.411674
+     Progress:        33.3%
+     Trend:           ⬇️ Improving (-0.0202 over last 10 epochs)
+Epoch 21/60: 100%
+ 1639/1639 [03:06<00:00,  8.90it/s, total=0.4190, recon=0.0209, kl=321.90, percept=0.457]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.31it/s, total=0.4102, recon=0.0206, kl=322.84, percept=0.447]
+
+Epoch 21/60 - 242.1s
+  Train - Total: 0.419023, Recon: 0.020894, KL: 321.897057, Percept: 0.4574
+  Val   - Total: 0.410163, Recon: 0.020577, KL: 322.841688, Percept: 0.4466
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.410163
+Epoch 22/60: 100%
+ 1639/1639 [03:14<00:00,  8.55it/s, total=0.4187, recon=0.0208, kl=321.17, percept=0.457]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.26it/s, total=0.4139, recon=0.0208, kl=321.69, percept=0.451]
+
+Epoch 22/60 - 249.6s
+  Train - Total: 0.418677, Recon: 0.020826, KL: 321.174277, Percept: 0.4572
+  Val   - Total: 0.413866, Recon: 0.020769, KL: 321.691217, Percept: 0.4512
+  LR: 0.000050
+Epoch 23/60: 100%
+ 1639/1639 [04:02<00:00,  6.86it/s, total=0.4194, recon=0.0208, kl=320.77, percept=0.458]
+Validation: 100%
+ 352/352 [01:00<00:00,  6.39it/s, total=0.4136, recon=0.0206, kl=320.68, percept=0.451]
+
+Epoch 23/60 - 303.1s
+  Train - Total: 0.419429, Recon: 0.020772, KL: 320.773514, Percept: 0.4582
+  Val   - Total: 0.413597, Recon: 0.020559, KL: 320.675216, Percept: 0.4512
+  LR: 0.000050
+Epoch 24/60: 100%
+ 1639/1639 [04:34<00:00,  4.65it/s, total=0.4191, recon=0.0207, kl=320.10, percept=0.458]
+Validation: 100%
+ 352/352 [01:29<00:00,  6.14it/s, total=0.4202, recon=0.0209, kl=317.28, percept=0.459]
+
+Epoch 24/60 - 364.6s
+  Train - Total: 0.419055, Recon: 0.020727, KL: 320.096740, Percept: 0.4579
+  Val   - Total: 0.420250, Recon: 0.020936, KL: 317.283179, Percept: 0.4595
+  LR: 0.000050
+Epoch 25/60: 100%
+ 1639/1639 [03:16<00:00,  8.36it/s, total=0.4195, recon=0.0207, kl=319.79, percept=0.459]
+Validation: 100%
+ 352/352 [00:55<00:00,  5.94it/s, total=0.4160, recon=0.0204, kl=319.41, percept=0.455]
+
+Epoch 25/60 - 252.4s
+  Train - Total: 0.419452, Recon: 0.020664, KL: 319.785665, Percept: 0.4585
+  Val   - Total: 0.416027, Recon: 0.020447, KL: 319.411605, Percept: 0.4545
+  LR: 0.000050
+  💾 Checkpoint saved: vae_60ep_epoch_25.pth
+Epoch 26/60: 100%
+ 1639/1639 [04:18<00:00,  4.99it/s, total=0.4197, recon=0.0206, kl=319.37, percept=0.459]
+Validation: 100%
+ 352/352 [01:37<00:00,  6.39it/s, total=0.4206, recon=0.0209, kl=315.58, percept=0.460]
+
+Epoch 26/60 - 355.6s
+  Train - Total: 0.419653, Recon: 0.020645, KL: 319.373836, Percept: 0.4588
+  Val   - Total: 0.420649, Recon: 0.020919, KL: 315.584935, Percept: 0.4602
+  LR: 0.000050
+Epoch 27/60: 100%
+ 1639/1639 [04:57<00:00,  4.80it/s, total=0.4211, recon=0.0206, kl=318.81, percept=0.461]
+Validation: 100%
+ 352/352 [01:31<00:00,  6.30it/s, total=0.4097, recon=0.0205, kl=318.33, percept=0.447]
+
+Epoch 27/60 - 388.6s
+  Train - Total: 0.421128, Recon: 0.020566, KL: 318.812368, Percept: 0.4609
+  Val   - Total: 0.409679, Recon: 0.020536, KL: 318.326761, Percept: 0.4466
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.409679
+Epoch 28/60: 100%
+ 1639/1639 [03:18<00:00,  8.60it/s, total=0.4183, recon=0.0205, kl=318.62, percept=0.457]
+Validation: 100%
+ 352/352 [00:56<00:00,  6.35it/s, total=0.4101, recon=0.0204, kl=318.28, percept=0.447]
+
+Epoch 28/60 - 254.2s
+  Train - Total: 0.418348, Recon: 0.020546, KL: 318.623827, Percept: 0.4574
+  Val   - Total: 0.410092, Recon: 0.020370, KL: 318.283836, Percept: 0.4474
+  LR: 0.000050
+Epoch 29/60: 100%
+ 1639/1639 [04:02<00:00,  8.68it/s, total=0.4173, recon=0.0205, kl=318.29, percept=0.456]
+Validation: 100%
+ 352/352 [00:59<00:00,  5.33it/s, total=0.4122, recon=0.0205, kl=316.47, percept=0.450]
+
+Epoch 29/60 - 301.9s
+  Train - Total: 0.417313, Recon: 0.020488, KL: 318.287369, Percept: 0.4562
+  Val   - Total: 0.412224, Recon: 0.020500, KL: 316.472101, Percept: 0.4501
+  LR: 0.000050
+Epoch 30/60: 100%
+ 1639/1639 [05:47<00:00,  4.04it/s, total=0.4198, recon=0.0205, kl=317.99, percept=0.459]
+Validation: 100%
+ 352/352 [01:46<00:00,  4.48it/s, total=0.4152, recon=0.0205, kl=316.00, percept=0.454]
+
+Epoch 30/60 - 454.7s
+  Train - Total: 0.419813, Recon: 0.020463, KL: 317.994264, Percept: 0.4594
+  Val   - Total: 0.415249, Recon: 0.020455, KL: 316.004003, Percept: 0.4540
+  LR: 0.000050
+  💾 Checkpoint saved: vae_60ep_epoch_30.pth
+
+  ============================================================
+  🎯 MILESTONE: Epoch 30/60
+  ============================================================
+     Perceptual loss: 0.4540
+     Best val loss:   0.409679
+     Progress:        50.0%
+Epoch 31/60: 100%
+ 1639/1639 [04:19<00:00,  5.21it/s, total=0.4173, recon=0.0204, kl=317.61, percept=0.456]
+Validation: 100%
+ 352/352 [01:50<00:00,  3.11it/s, total=0.4072, recon=0.0203, kl=317.49, percept=0.444]
+
+Epoch 31/60 - 370.3s
+  Train - Total: 0.417272, Recon: 0.020425, KL: 317.614888, Percept: 0.4564
+  Val   - Total: 0.407150, Recon: 0.020294, KL: 317.492385, Percept: 0.4439
+  LR: 0.000050
+  🎉 New best model! Val loss: 0.407150
+Epoch 32/60: 100%
+ 1639/1639 [04:03<00:00,  7.04it/s, total=0.4168, recon=0.0204, kl=317.52, percept=0.456]
+Validation: 100%
+ 352/352 [01:13<00:00,  5.03it/s, total=0.4074, recon=0.0202, kl=318.33, percept=0.444]
+
+Epoch 32/60 - 316.5s
+  Train - Total: 0.416846, Recon: 0.020425, KL: 317.517373, Percept: 0.4558
+  Val   - Total: 0.407365, Recon: 0.020206, KL: 318.328020, Percept: 0.4442
+  LR: 0.000050
+Epoch 33/60: 100%
+ 1639/1639 [04:12<00:00,  6.96it/s, total=0.4172, recon=0.0204, kl=317.22, percept=0.456]
+Validation: 100%
+ 352/352 [01:04<00:00,  6.26it/s, total=0.4123, recon=0.0203, kl=316.16, percept=0.450]
+
+Epoch 33/60 - 316.3s
+  Train - Total: 0.417191, Recon: 0.020381, KL: 317.219664, Percept: 0.4564
+  Val   - Total: 0.412307, Recon: 0.020305, KL: 316.158346, Percept: 0.4505
+  LR: 0.000050
+Epoch 34/60: 100%
+ 1639/1639 [03:56<00:00,  5.81it/s, total=0.4175, recon=0.0203, kl=316.98, percept=0.457]
+Validation: 100%
+ 352/352 [01:20<00:00,  4.80it/s, total=0.4137, recon=0.0204, kl=314.14, percept=0.452]
+
+Epoch 34/60 - 317.1s
+  Train - Total: 0.417519, Recon: 0.020347, KL: 316.975343, Percept: 0.4568
+  Val   - Total: 0.413726, Recon: 0.020428, KL: 314.135691, Percept: 0.4524
+  LR: 0.000050
+Epoch 35/60: 100%
+ 1639/1639 [04:20<00:00,  6.85it/s, total=0.4155, recon=0.0203, kl=316.56, percept=0.454]
+Validation: 100%
+ 352/352 [01:18<00:00,  3.67it/s, total=0.4108, recon=0.0201, kl=316.42, percept=0.449]
+
+Epoch 35/60 - 338.9s
+  Train - Total: 0.415542, Recon: 0.020322, KL: 316.564137, Percept: 0.4545
+  Val   - Total: 0.410808, Recon: 0.020112, KL: 316.421042, Percept: 0.4488
+  LR: 0.000050
+  💾 Checkpoint saved: vae_60ep_epoch_35.pth
+Epoch 36/60: 100%
+ 1639/1639 [04:12<00:00,  8.80it/s, total=0.4166, recon=0.0203, kl=316.61, percept=0.456]
+Validation: 100%
+ 352/352 [00:57<00:00,  6.38it/s, total=0.4125, recon=0.0200, kl=316.84, percept=0.451]
+
+Epoch 36/60 - 310.3s
+  Train - Total: 0.416613, Recon: 0.020299, KL: 316.607038, Percept: 0.4558
+  Val   - Total: 0.412505, Recon: 0.020050, KL: 316.842971, Percept: 0.4510
+  LR: 0.000050
+Epoch 37/60: 100%
+ 1639/1639 [03:13<00:00,  8.90it/s, total=0.4135, recon=0.0203, kl=316.34, percept=0.452]
+Validation: 100%
+ 352/352 [00:56<00:00,  6.29it/s, total=0.4131, recon=0.0203, kl=315.88, percept=0.452]
+
+Epoch 37/60 - 249.6s
+  Train - Total: 0.413537, Recon: 0.020272, KL: 316.342163, Percept: 0.4520
+  Val   - Total: 0.413130, Recon: 0.020325, KL: 315.878030, Percept: 0.4515
+  LR: 0.000025
+Epoch 38/60: 100%
+ 1639/1639 [03:07<00:00,  8.68it/s, total=0.4154, recon=0.0202, kl=316.55, percept=0.454]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.41it/s, total=0.4082, recon=0.0202, kl=314.94, percept=0.446]
+
+Epoch 38/60 - 242.2s
+  Train - Total: 0.415445, Recon: 0.020193, KL: 316.548836, Percept: 0.4545
+  Val   - Total: 0.408224, Recon: 0.020165, KL: 314.937979, Percept: 0.4457
+  LR: 0.000025
+Epoch 39/60: 100%
+ 1639/1639 [03:04<00:00,  8.96it/s, total=0.4148, recon=0.0202, kl=316.27, percept=0.454]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.36it/s, total=0.4075, recon=0.0199, kl=317.11, percept=0.445]
+
+Epoch 39/60 - 239.2s
+  Train - Total: 0.414760, Recon: 0.020174, KL: 316.271876, Percept: 0.4537
+  Val   - Total: 0.407538, Recon: 0.019920, KL: 317.109361, Percept: 0.4449
+  LR: 0.000025
+Epoch 40/60: 100%
+ 1639/1639 [03:07<00:00,  8.95it/s, total=0.4146, recon=0.0202, kl=316.09, percept=0.454]
+Validation: 100%
+ 352/352 [00:56<00:00,  6.33it/s, total=0.4105, recon=0.0201, kl=314.76, percept=0.449]
+
+Epoch 40/60 - 244.4s
+  Train - Total: 0.414578, Recon: 0.020167, KL: 316.093598, Percept: 0.4535
+  Val   - Total: 0.410468, Recon: 0.020077, KL: 314.757962, Percept: 0.4486
+  LR: 0.000025
+  💾 Checkpoint saved: vae_60ep_epoch_40.pth
+
+  ============================================================
+  🎯 MILESTONE: Epoch 40/60
+  ============================================================
+     Perceptual loss: 0.4486
+     Best val loss:   0.407150
+     Progress:        66.7%
+Epoch 41/60: 100%
+ 1639/1639 [03:10<00:00,  8.48it/s, total=0.4144, recon=0.0202, kl=316.07, percept=0.453]
+Validation: 100%
+ 352/352 [00:56<00:00,  6.28it/s, total=0.4088, recon=0.0200, kl=316.20, percept=0.447]
+
+Epoch 41/60 - 247.1s
+  Train - Total: 0.414449, Recon: 0.020161, KL: 316.065616, Percept: 0.4534
+  Val   - Total: 0.408845, Recon: 0.019989, KL: 316.203897, Percept: 0.4465
+  LR: 0.000025
+Epoch 42/60: 100%
+ 1639/1639 [03:07<00:00,  8.75it/s, total=0.4150, recon=0.0202, kl=315.92, percept=0.454]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.27it/s, total=0.4104, recon=0.0200, kl=315.21, percept=0.449]
+
+Epoch 42/60 - 243.0s
+  Train - Total: 0.414975, Recon: 0.020152, KL: 315.923717, Percept: 0.4540
+  Val   - Total: 0.410384, Recon: 0.020028, KL: 315.214327, Percept: 0.4485
+  LR: 0.000025
+Epoch 43/60: 100%
+ 1639/1639 [03:08<00:00,  8.69it/s, total=0.4138, recon=0.0201, kl=315.72, percept=0.453]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.38it/s, total=0.4066, recon=0.0198, kl=316.13, percept=0.444]
+
+Epoch 43/60 - 243.8s
+  Train - Total: 0.413797, Recon: 0.020133, KL: 315.715446, Percept: 0.4526
+  Val   - Total: 0.406609, Recon: 0.019846, KL: 316.127064, Percept: 0.4439
+  LR: 0.000025
+  🎉 New best model! Val loss: 0.406609
+Epoch 44/60: 100%
+ 1639/1639 [03:09<00:00,  8.76it/s, total=0.4147, recon=0.0201, kl=315.60, percept=0.454]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.40it/s, total=0.4078, recon=0.0202, kl=313.45, percept=0.445]
+
+Epoch 44/60 - 244.0s
+  Train - Total: 0.414682, Recon: 0.020125, KL: 315.599223, Percept: 0.4537
+  Val   - Total: 0.407839, Recon: 0.020188, KL: 313.450463, Percept: 0.4454
+  LR: 0.000025
+Epoch 45/60: 100%
+ 1639/1639 [03:04<00:00,  8.81it/s, total=0.4141, recon=0.0201, kl=315.52, percept=0.453]
+Validation: 100%
+ 352/352 [00:55<00:00,  6.35it/s, total=0.4100, recon=0.0201, kl=314.00, percept=0.448]
+
+Epoch 45/60 - 239.7s
+  Train - Total: 0.414126, Recon: 0.020123, KL: 315.519494, Percept: 0.4531
+  Val   - Total: 0.410041, Recon: 0.020108, KL: 313.998827, Percept: 0.4482
+  LR: 0.000025
+  💾 Checkpoint saved: vae_60ep_epoch_45.pth
+Epoch 46/60: 100%
+ 1639/1639 [03:04<00:00,  9.02it/s, total=0.4144, recon=0.0201, kl=315.52, percept=0.453]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.40it/s, total=0.4112, recon=0.0202, kl=312.45, percept=0.450]
+
+Epoch 46/60 - 239.2s
+  Train - Total: 0.414352, Recon: 0.020107, KL: 315.515981, Percept: 0.4534
+  Val   - Total: 0.411235, Recon: 0.020172, KL: 312.446609, Percept: 0.4498
+  LR: 0.000025
+Epoch 47/60: 100%
+ 1639/1639 [03:04<00:00,  9.06it/s, total=0.4146, recon=0.0201, kl=315.48, percept=0.454]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.41it/s, total=0.4069, recon=0.0202, kl=312.16, percept=0.444]
+
+Epoch 47/60 - 239.0s
+  Train - Total: 0.414590, Recon: 0.020098, KL: 315.477361, Percept: 0.4537
+  Val   - Total: 0.406899, Recon: 0.020217, KL: 312.162954, Percept: 0.4443
+  LR: 0.000025
+Epoch 48/60: 100%
+ 1639/1639 [03:04<00:00,  8.93it/s, total=0.4143, recon=0.0201, kl=315.27, percept=0.453]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.40it/s, total=0.4123, recon=0.0200, kl=313.68, percept=0.451]
+
+Epoch 48/60 - 239.7s
+  Train - Total: 0.414257, Recon: 0.020088, KL: 315.266980, Percept: 0.4533
+  Val   - Total: 0.412288, Recon: 0.020028, KL: 313.681560, Percept: 0.4511
+  LR: 0.000025
+Epoch 49/60: 100%
+ 1639/1639 [03:04<00:00,  8.88it/s, total=0.4151, recon=0.0201, kl=315.18, percept=0.454]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.41it/s, total=0.4089, recon=0.0200, kl=313.55, percept=0.447]
+
+Epoch 49/60 - 239.1s
+  Train - Total: 0.415120, Recon: 0.020086, KL: 315.181456, Percept: 0.4544
+  Val   - Total: 0.408924, Recon: 0.020011, KL: 313.551407, Percept: 0.4469
+  LR: 0.000013
+Epoch 50/60: 100%
+ 1639/1639 [03:06<00:00,  8.62it/s, total=0.4143, recon=0.0200, kl=315.73, percept=0.453]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.41it/s, total=0.4136, recon=0.0201, kl=312.16, percept=0.453]
+
+Epoch 50/60 - 241.5s
+  Train - Total: 0.414257, Recon: 0.020031, KL: 315.731602, Percept: 0.4533
+  Val   - Total: 0.413552, Recon: 0.020067, KL: 312.155237, Percept: 0.4528
+  LR: 0.000013
+  💾 Checkpoint saved: vae_60ep_epoch_50.pth
+
+  ============================================================
+  🎯 MILESTONE: Epoch 50/60
+  ============================================================
+     Perceptual loss: 0.4528
+     Best val loss:   0.406609
+     Progress:        83.3%
+Epoch 51/60: 100%
+ 1639/1639 [03:04<00:00,  8.86it/s, total=0.4136, recon=0.0200, kl=315.50, percept=0.453]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.42it/s, total=0.4131, recon=0.0200, kl=312.78, percept=0.452]
+
+Epoch 51/60 - 239.0s
+  Train - Total: 0.413625, Recon: 0.020025, KL: 315.497971, Percept: 0.4526
+  Val   - Total: 0.413060, Recon: 0.019978, KL: 312.784257, Percept: 0.4523
+  LR: 0.000013
+Epoch 52/60: 100%
+ 1639/1639 [03:07<00:00,  7.91it/s, total=0.4133, recon=0.0200, kl=315.52, percept=0.452]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.41it/s, total=0.4085, recon=0.0201, kl=313.11, percept=0.446]
+
+Epoch 52/60 - 242.5s
+  Train - Total: 0.413277, Recon: 0.020024, KL: 315.515676, Percept: 0.4521
+  Val   - Total: 0.408535, Recon: 0.020068, KL: 313.110127, Percept: 0.4464
+  LR: 0.000013
+Epoch 53/60: 100%
+ 1639/1639 [03:10<00:00,  8.85it/s, total=0.4132, recon=0.0200, kl=315.35, percept=0.452]
+Validation: 100%
+ 352/352 [00:56<00:00,  6.30it/s, total=0.4048, recon=0.0196, kl=316.81, percept=0.442]
+
+Epoch 53/60 - 246.4s
+  Train - Total: 0.413190, Recon: 0.020008, KL: 315.348533, Percept: 0.4521
+  Val   - Total: 0.404809, Recon: 0.019650, KL: 316.807159, Percept: 0.4418
+  LR: 0.000013
+  🎉 New best model! Val loss: 0.404809
+Epoch 54/60: 100%
+ 1639/1639 [03:10<00:00,  8.97it/s, total=0.4144, recon=0.0200, kl=315.20, percept=0.454]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.41it/s, total=0.4065, recon=0.0202, kl=313.00, percept=0.444]
+
+Epoch 54/60 - 244.9s
+  Train - Total: 0.414394, Recon: 0.020031, KL: 315.204162, Percept: 0.4536
+  Val   - Total: 0.406528, Recon: 0.020243, KL: 313.002466, Percept: 0.4437
+  LR: 0.000013
+Epoch 55/60: 100%
+ 1639/1639 [03:04<00:00,  8.72it/s, total=0.4152, recon=0.0200, kl=315.19, percept=0.455]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.40it/s, total=0.4129, recon=0.0200, kl=312.68, percept=0.452]
+
+Epoch 55/60 - 239.4s
+  Train - Total: 0.415243, Recon: 0.020007, KL: 315.194786, Percept: 0.4546
+  Val   - Total: 0.412928, Recon: 0.020031, KL: 312.675142, Percept: 0.4520
+  LR: 0.000013
+  💾 Checkpoint saved: vae_60ep_epoch_55.pth
+Epoch 56/60: 100%
+ 1639/1639 [03:04<00:00,  9.02it/s, total=0.4148, recon=0.0200, kl=315.13, percept=0.454]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.40it/s, total=0.4098, recon=0.0200, kl=313.08, percept=0.448]
+
+Epoch 56/60 - 239.5s
+  Train - Total: 0.414758, Recon: 0.020014, KL: 315.131482, Percept: 0.4540
+  Val   - Total: 0.409797, Recon: 0.019964, KL: 313.078495, Percept: 0.4482
+  LR: 0.000013
+Epoch 57/60: 100%
+ 1639/1639 [03:04<00:00,  8.87it/s, total=0.4142, recon=0.0200, kl=315.06, percept=0.453]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.34it/s, total=0.4090, recon=0.0200, kl=312.98, percept=0.447]
+
+Epoch 57/60 - 239.7s
+  Train - Total: 0.414212, Recon: 0.019990, KL: 315.060686, Percept: 0.4534
+  Val   - Total: 0.408975, Recon: 0.019954, KL: 312.975748, Percept: 0.4472
+  LR: 0.000013
+Epoch 58/60: 100%
+ 1639/1639 [03:04<00:00,  9.03it/s, total=0.4136, recon=0.0200, kl=315.14, percept=0.453]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.42it/s, total=0.4093, recon=0.0199, kl=313.57, percept=0.448]
+
+Epoch 58/60 - 239.2s
+  Train - Total: 0.413619, Recon: 0.019988, KL: 315.140332, Percept: 0.4526
+  Val   - Total: 0.409334, Recon: 0.019928, KL: 313.573579, Percept: 0.4476
+  LR: 0.000013
+Epoch 59/60: 100%
+ 1639/1639 [03:04<00:00,  9.04it/s, total=0.4141, recon=0.0200, kl=315.13, percept=0.453]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.40it/s, total=0.4067, recon=0.0200, kl=312.22, percept=0.444]
+
+Epoch 59/60 - 238.9s
+  Train - Total: 0.414076, Recon: 0.019987, KL: 315.127315, Percept: 0.4532
+  Val   - Total: 0.406740, Recon: 0.020006, KL: 312.224664, Percept: 0.4444
+  LR: 0.000006
+Epoch 60/60: 100%
+ 1639/1639 [03:04<00:00,  8.92it/s, total=0.4130, recon=0.0200, kl=315.31, percept=0.452]
+Validation: 100%
+ 352/352 [00:54<00:00,  6.39it/s, total=0.4108, recon=0.0199, kl=313.55, percept=0.450]
+
+Epoch 60/60 - 239.0s
+  Train - Total: 0.413014, Recon: 0.019965, KL: 315.310812, Percept: 0.4519
+  Val   - Total: 0.410836, Recon: 0.019871, KL: 313.545206, Percept: 0.4495
+  LR: 0.000006
+  💾 Checkpoint saved: vae_60ep_epoch_60.pth
+
+  ============================================================
+  🎯 MILESTONE: Epoch 60/60
+  ============================================================
+     Perceptual loss: 0.4495
+     Best val loss:   0.404809
+     Progress:        100.0%
+     Trend:           ⬇️ Improving (-0.0027 over last 10 epochs)
+=====================================================================
+================================================================================
+LOADING BEST MODEL FOR EVALUATION
+================================================================================
+
+Loading: vae_60ep_best.pth
+  Epoch: 53
+  Val loss: 0.404809
+
+Getting validation samples...
+Loaded 64 validation samples
+
+================================================================================
+TEST 1: RECONSTRUCTION QUALITY
+================================================================================
+
+Overall Metrics:
+  MSE: 0.019245 (1.92%)
+  MAE: 0.106676
+  RMSE: 0.137056
+
+Per-Sample Statistics:
+  MSE - Mean: 0.019245, Std: 0.006240
+  MAE - Mean: 0.106676, Std: 0.018415
+  Worst MSE: 0.042205
+  Best MSE: 0.009181
+
+Clinical Context:
+  ECG range: [-1.5, 1.5] mV = 3.0 mV
+  RMSE as % of range: 4.57%
+  MAE as % of range: 3.56%
+
+================================================================================
+TEST 2: LATENT SPACE HEALTH (POSTERIOR COLLAPSE CHECK)
+================================================================================
+
+Latent Space Statistics:
+  Mean std: 0.994078
+  Median std: 0.999947
+  Min std: 0.060444
+  Max std: 1.004231
+
+Posterior Collapse Analysis:
+  Total latent dimensions: 25,600,000
+  Collapsed dimensions (std < 0.01): 0
+  Collapse percentage: 0.00%
+  ✅ HEALTHY LATENT SPACE
+  Latent dimensions are being used effectively.
+
+================================================================================
+TEST 3: RANDOM GENERATION FROM LATENT SPACE
+================================================================================
+
+Random Generation Statistics:
+  Mean: -0.576222
+  Std: 0.262426
+  Range: [-1.424729, 1.494856]
+  Expected range: [-1.5, 1.5] (Clinical range)
+  ⚠️  POOR QUALITY GENERATION
+  Random samples may not be realistic ECGs.
+
+================================================================================
+CREATING VISUALIZATIONS
+================================================================================
+Saved: error_analysis.png
+
+================================================================================
+EVALUATION SUMMARY
+================================================================================
+
+📊 RECONSTRUCTION QUALITY:
+  MSE: 0.019245 (FAIL - Target: <0.01)
+  RMSE: 0.137056
+  MAE: 0.106676
+  Error as % of signal range: 4.57%
+
+🧬 LATENT SPACE HEALTH:
+  Mean std: 0.994078 (HEALTHY)
+  Collapsed dimensions: 0.00%
+  Status: ✅ Healthy
+
+🎲 RANDOM GENERATION:
+  Mean: -0.576222
+  Std: 0.262426
+  Quality: ⚠️ Poor
+
+💡 RECOMMENDATIONS:
+  1. Current MSE is 0.019245, target is 0.01
+  2. This is EXPECTED with perceptual loss (prioritizes features over pixel-perfect)
+  3. Check classifier agreement in Cell 9 - that's more important!
+
+📁 All visualizations saved to:
+  D:\research\codes\models\phase2_diffusion\results\vae_latent625_60ep
+
+================================================================================
+EVALUATION COMPLETE
+================================================================================
+================================================================================
+================================================================================
+================================================================================
+================================================================================
+CLINICAL VALIDATION: CLASSIFIER AGREEMENT TEST
+================================================================================
+
+Step 1: Loading Phase 1 AFib Classifier...
+✅ Classifier loaded successfully
+   Device: cuda
+   Checkpoint: best_model.pth
+
+Step 2: Setting up preprocessing...
+✅ Preprocessing function defined
+
+Step 3: Getting test samples...
+  Loaded validation data: (22484, 2500)
+  Labels: (22484,)
+
+Test set created:
+  Total samples: 200
+  AFib samples: 100
+  Normal samples: 100
+  Test tensor shape: torch.Size([200, 1, 2500])
+  Test tensor range: [-1.500, 1.500]
+
+================================================================================
+STEP 4: CLASSIFIER ON ORIGINAL ECGS
+================================================================================
+  Original ECGs normalization check:
+    Per-sample means: min=-0.000000, max=0.000000, avg=0.000000
+    Per-sample stds:  min=1.000200, max=1.000200, avg=1.000200
+    Expected: means ≈ 0, stds ≈ 1
+
+Classifier Performance on ORIGINAL ECGs:
+  Accuracy: 93.00%
+  Mean confidence: 0.9016
+  Predictions: AFib=104, Normal=96
+  AFib accuracy: 95.00%
+  Normal accuracy: 91.00%
+
+================================================================================
+STEP 5: RECONSTRUCT ECGS THROUGH VAE
+================================================================================
+VAE Reconstruction:
+  Input shape: torch.Size([200, 1, 2500])
+  Output shape: torch.Size([200, 1, 2500])
+  Reconstruction MSE: 0.019578
+  Input range: [-1.500, 1.500]
+  Output range: [-1.483, 1.487]
+
+================================================================================
+STEP 6: CLASSIFIER ON RECONSTRUCTED ECGS
+================================================================================
+  Reconstructed ECGs normalization check:
+    Per-sample means: min=-0.000000, max=0.000000, avg=-0.000000
+    Per-sample stds:  min=1.000200, max=1.000200, avg=1.000200
+    Expected: means ≈ 0, stds ≈ 1
+
+Classifier Performance on RECONSTRUCTED ECGs:
+  Accuracy: 79.00%
+  Mean confidence: 0.8310
+  Predictions: AFib=138, Normal=62
+  AFib accuracy: 98.00%
+  Normal accuracy: 60.00%
+
+================================================================================
+STEP 7: PREDICTION AGREEMENT ANALYSIS
+================================================================================
+
+🎯 CRITICAL METRIC:
+   Prediction Agreement: 79.00%
+   (How often original and reconstructed get same prediction)
+
+   Agreement by class:
+   - AFib samples: 93.00%
+   - Normal samples: 65.00%
+
+   Detailed breakdown:
+   - Both correct: 151 (75.50%)
+   - Both wrong: 7 (3.50%)
+   - Disagree: 42 (21.00%)
+
+   Disagreements breakdown:
+   - Original correct, Recon wrong: 35
+   - Original wrong, Recon correct: 7
+
+   Confidence comparison:
+   - Original mean conf: 0.9016
+   - Reconstructed mean conf: 0.8310
+   - Confidence drop: 0.1086
+
+================================================================================
+STEP 8: VISUALIZING EXAMPLES
+================================================================================
+
+Saved: classifier_agreement_examples.png
+=================================================
+
+================================================================================
+FINAL VERDICT
+================================================================================
+
+📊 Summary:
+   Original ECG Accuracy:      93.00%
+   Reconstructed ECG Accuracy: 79.00%
+   Accuracy Drop:              14.00%
+
+   🎯 Prediction Agreement:     79.00%
+   Confidence Preservation:    89.14%
+
+💡 Clinical Interpretation:
+   ⚠️ MARGINAL - Use with caution
+
+   Significant disagreement (>20%) suggests rhythm patterns are partially lost. VAE needs improvement for clinical applications.
+
+🔬 For Counterfactual Generation:
+   ⚠️ Consider training VAE longer (to epoch 100)
+   ⚠️ Current agreement (79.0%) is below recommended 90%
+   ⚠️ Generated counterfactuals might not be reliably classified
+
+================================================================================
+CLINICAL VALIDATION COMPLETE
+================================================================================
+================================================================================
+EXTENDED EVALUATION - DECISION POINT
+================================================================================
+
+================================================================================
+TEST 1: LARGE SCALE VALIDATION (1000 SAMPLES)
+================================================================================
+Large test set: 1000 samples
+
+Large Scale Results (N=1000):
+  Original accuracy: 92.50%
+  Reconstructed accuracy: 79.60%
+  Overall agreement: 79.10%
+  AFib agreement: 92.20%
+  Normal agreement: 66.00%
+
+================================================================================
+TEST 2: RECONSTRUCTION QUALITY BY CLASS
+================================================================================
+
+Reconstruction MSE by class:
+  AFib samples: 0.020137 (2.01%)
+  Normal samples: 0.019286 (1.93%)
+  Difference: 0.000851
+
+================================================================================
+TEST 3: EDGE CASE ANALYSIS
+================================================================================
+
+Disagreement samples analysis:
+  Count: 209
+  MSE statistics:
+    Mean: 0.018411
+    Median: 0.017758
+    Max: 0.043037
+    Min: 0.008954
+
+  Agreement samples MSE: 0.020055
+  Disagreement samples MSE: 0.018411
+  Ratio: 0.92x higher
+
+================================================================================
+TEST 4: LATENT INTERPOLATION (AFib → Normal Transition)
+================================================================================
+
+Interpolation sequence (AFib → Normal):
+  Step   Alpha    Prediction  
+  ------------------------------
+  0      0.00     AFib        
+  1      0.10     AFib        
+  2      0.20     AFib        
+  3      0.30     AFib        
+  4      0.40     AFib        
+  5      0.50     AFib        
+  6      0.60     Normal      
+  7      0.70     Normal      
+  8      0.80     Normal      
+  9      0.90     Normal      
+  10     1.00     Normal      
+
+  ✅ Smooth transition at step 5
+
+Saved: latent_interpolation.png
+
+===============================================
+
+================================================================================
+DECISION POINT: PROCEED OR MODIFY?
+================================================================================
+
+📊 Key Metrics Summary:
+  Metric                                   Value           Target          Status    
+  --------------------------------------------------------------------------------
+  Overall Agreement                        79.1          % >90%            ❌
+  Normal→Normal Agreement                  66.0          % >85%            ❌
+  AFib→AFib Agreement                      92.2          % >85%            ✅
+  Reconstruction MSE                       0.0193 <0.02           ✅
+
+💡 RECOMMENDATION:
+  ⚠️  NEEDS IMPROVEMENT - MULTIPLE OPTIONS
+  Option 1: Add perceptual loss (recommended)
+  Option 2: Increase LATENT_LENGTH to 625 (more capacity)
+  Option 3: Both perceptual loss + larger latent
+  Timeline: +3-5 days
+
+================================================================================
+EXTENDED EVALUATION COMPLETE
+================================================================================

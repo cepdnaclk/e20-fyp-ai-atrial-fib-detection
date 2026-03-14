@@ -1,0 +1,44 @@
+{
+  "signal_quality": {
+    "psnr": {
+      "mean": 10.1873140335083,
+      "std": 3.809267520904541
+    },
+    "correlation": {
+      "mean": 0.00030964933102950454,
+      "std": 0.06809455156326294
+    },
+    "snr_original": {
+      "mean": 14.24394416809082,
+      "std": 2.281909942626953
+    },
+    "snr_generated": {
+      "mean": 15.736298561096191,
+      "std": 2.580672264099121
+    }
+  },
+  "plausibility": {
+    "mean_score": 0.8899375,
+    "std_score": 0.03982378176102815,
+    "above_0.7": 1.0,
+    "stored_mean": 0.7585895833333333
+  },
+  "uniqueness": {
+    "max_corr_to_nearest": {
+      "mean": 0.29573513237184024,
+      "std": 0.0744208287026171
+    },
+    "near_copies_above_0.95": 0,
+    "l2_to_nearest": {
+      "mean": 0.05765368789434433,
+      "std": 0.03253953903913498
+    }
+  },
+  "distribution_tests": {
+    "amplitude_ks": {
+      "statistic": 0.09225,
+      "p_value": 0.0
+    },
+    "wasserstein_distance": 0.008023857851809405
+  }
+}

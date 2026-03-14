@@ -209,3 +209,21 @@ __marimo__/
 *.pth
 
 models/
+
+# Large data files
+*.npz
+*.h5
+*.hdf5
+*.csv
+data/raw/
+
+# Jupyter notebooks
+*.ipynb
+
+# IDE
+.cursor/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
