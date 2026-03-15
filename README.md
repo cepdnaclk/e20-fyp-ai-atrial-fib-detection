@@ -3,8 +3,8 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![HuggingFace Model](https://img.shields.io/badge/🤗_Model-Hub-yellow.svg)](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation)
-[![HuggingFace Demo](https://img.shields.io/badge/🤗_Demo-Space-orange.svg)](https://huggingface.co/spaces/TharakaDil2001/ecg-augmentation-demo)
+[![HuggingFace Model](https://img.shields.io/badge/_Model-Hub-yellow.svg)](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation)
+[![HuggingFace Demo](https://img.shields.io/badge/_Demo-Space-orange.svg)](https://huggingface.co/spaces/TharakaDil2001/ecg-augmentation-demo)
 
 *Final Year Research Project — Group 29*  
 *Department of Computer Engineering, University of Peradeniya, Sri Lanka*  
@@ -299,10 +299,10 @@ python src/evaluation/statistical_analysis.py       # TOST equivalence testing
 
 | Resource | Link |
 |---|---|
-| 🤗 Model Hub | [TharakaDil2001/diffusion-ecg-augmentation](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation) |
-| 🤗 Live Demo | [ecg-augmentation-demo](https://huggingface.co/spaces/TharakaDil2001/ecg-augmentation-demo) |
-| 📄 Research Paper | [Paper PDF](diffusion_pipeline/paper/paper.pdf) |
-| 🌐 Project Page | [cepdnaclk.github.io/e20-fyp-ai-atrial-fib-detection](https://cepdnaclk.github.io/e20-fyp-ai-atrial-fib-detection/) |
+|  Model Hub | [TharakaDil2001/diffusion-ecg-augmentation](https://huggingface.co/TharakaDil2001/diffusion-ecg-augmentation) |
+|  Live Demo | [ecg-augmentation-demo](https://huggingface.co/spaces/TharakaDil2001/ecg-augmentation-demo) |
+|  Research Paper | [Paper PDF](diffusion_pipeline/paper/paper.pdf) |
+|  Project Page | [cepdnaclk.github.io/e20-fyp-ai-atrial-fib-detection](https://cepdnaclk.github.io/e20-fyp-ai-atrial-fib-detection/) |
 
 ---
 
