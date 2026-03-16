@@ -2,10 +2,11 @@
 # Please refer above link to know the available configurations
 
 title: "Diffusion-Based Counterfactual ECG Generation for Atrial Fibrillation Data Augmentation"
-remote_theme: cepdnaclk/eYY-project-theme
+remote_theme: pages-themes/minimal@v0.2.0
 description: "A diffusion-based data augmentation pipeline that generates synthetic ECG segments by transforming existing recordings into counterfactual waveforms for privacy-preserving AFib detection."
 markdown: kramdown
-
+plugins:
+  - jekyll-remote-theme
 kramdown:
   parse_block_html: true
   syntax_highlighter_opts:
