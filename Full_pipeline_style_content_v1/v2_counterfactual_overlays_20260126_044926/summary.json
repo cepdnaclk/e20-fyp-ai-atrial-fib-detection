@@ -1,0 +1,16 @@
+{
+  "timestamp": "20260126_044926",
+  "num_test_samples": 13960,
+  "num_verified": 200,
+  "num_visualized": 20,
+  "results": {
+    "normal_to_afib": {
+      "flip_rate": 0.6518518518518519,
+      "mean_correlation": 0.9510018756247066
+    },
+    "afib_to_normal": {
+      "flip_rate": 0.9846153846153847,
+      "mean_correlation": 0.8616665850382192
+    }
+  }
+}

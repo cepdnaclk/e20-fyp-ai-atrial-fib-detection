@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-01-26T01:42:39.145935",
+  "total_samples": 10,
+  "flip_success_rate": 1.0,
+  "mean_correlation": 0.3445874309501915,
+  "std_correlation": 0.1481416909575571,
+  "min_correlation": 0.16273905609553352,
+  "max_correlation": 0.6857869064983027
+}

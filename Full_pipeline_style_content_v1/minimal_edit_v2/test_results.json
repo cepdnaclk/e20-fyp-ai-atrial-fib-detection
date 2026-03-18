@@ -1,0 +1,9 @@
+{
+  "flip_rate": 0.9965616045845272,
+  "mean_correlation": 0.9951599997145388,
+  "std_correlation": 0.003058957006026648,
+  "min_correlation": 0.9472304475314322,
+  "combined_score": 0.9917382461338585,
+  "num_samples": 13960,
+  "best_epoch": 4
+}

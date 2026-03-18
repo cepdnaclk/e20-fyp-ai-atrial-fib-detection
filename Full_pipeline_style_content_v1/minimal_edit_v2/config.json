@@ -1,0 +1,19 @@
+{
+  "data_path": "./ecg_afib_data/X_combined.npy",
+  "labels_path": "./ecg_afib_data/y_combined.npy",
+  "classifier_path": "./best_model/best_model.pth",
+  "num_epochs": 100,
+  "batch_size": 32,
+  "lr": 0.0001,
+  "weight_decay": 0.0001,
+  "lambda_identity": 1.0,
+  "lambda_flip": 1.0,
+  "lambda_similarity": 2.0,
+  "lambda_sparsity": 0.1,
+  "patience": 15,
+  "dropout": 0.1,
+  "train_ratio": 0.7,
+  "val_ratio": 0.15,
+  "test_ratio": 0.15,
+  "timestamp": "2026-01-26T03:45:06.157838"
+}

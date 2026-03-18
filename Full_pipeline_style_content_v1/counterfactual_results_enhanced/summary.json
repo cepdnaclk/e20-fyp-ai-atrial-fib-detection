@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-01-25T17:34:10.353736",
+  "total_samples": 30,
+  "flip_success_rate": 1.0,
+  "afib_to_normal": {
+    "total": 17,
+    "success": 17,
+    "rate": 1.0
+  },
+  "normal_to_afib": {
+    "total": 13,
+    "success": 13,
+    "rate": 1.0
+  }
+}

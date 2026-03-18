@@ -1,0 +1,17 @@
+{
+  "normal_to_afib": {
+    "flip_rate": 0.9440914866581956,
+    "correlation": 0.7081754036513799,
+    "total": 8657
+  },
+  "afib_to_normal": {
+    "flip_rate": 0.5445973976994154,
+    "correlation": 0.7093739982347199,
+    "total": 5303
+  },
+  "overall": {
+    "flip_rate": 0.7923352435530086,
+    "correlation": 0.7086307150464696,
+    "total": 13960
+  }
+}

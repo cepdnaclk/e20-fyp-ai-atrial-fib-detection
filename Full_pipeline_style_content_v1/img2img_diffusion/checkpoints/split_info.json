@@ -1,0 +1,8 @@
+{
+  "train_size": 65146,
+  "val_size": 13960,
+  "test_size": 13960,
+  "train_afib": 24749,
+  "val_afib": 5304,
+  "test_afib": 5303
+}
